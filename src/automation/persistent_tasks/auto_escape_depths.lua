@@ -1,4 +1,4 @@
-local automation_struct = require("@src/automation/struct");
+﻿local automation_struct = require("@src/automation/struct");
 local autofarm_util = require("@src/utility/deepwoken/autofarm_utilitys");
 local struct;
 
@@ -281,7 +281,7 @@ local state_machine = StateMachine.create({
                 return
             end
 
-            if is_dungeon and workspace:WaitForChild("DepthsTrial", 9e9) then
+            if is_dungeon and workspace:WaitForChild("DepthsTrial",5) then
                 self:begin();
                 return
             end
@@ -348,4 +348,5 @@ struct = automation_struct:construct({
 struct.logic = autoescape;
 
 return struct;
+
 

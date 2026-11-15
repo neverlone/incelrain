@@ -1,5 +1,5 @@
-
--- Safely load DataReplication, fallback to stub if not present (e.g., non‑Deepwoken place)
+﻿
+-- Safely load DataReplication, fallback to stub if not present (e.g., nonâ€‘Deepwoken place)
 local data_replication
 do
     local info = services.ReplicatedStorage:FindFirstChild("Info", 5)
@@ -384,7 +384,7 @@ function builder:manual_shrine()
     if shrine_button then return end
 
     pcall(function()
-        Library:Notify("Please click this button when you have shrined and finished up.", 9e9)
+        Library:Notify("Please click this button when you have shrined and finished up.",5)
     end)
 
     shrine_button = Instance.new("TextButton", services.CoreGui.RobloxGui);

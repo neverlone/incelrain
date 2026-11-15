@@ -1,4 +1,4 @@
-return LPH_NO_VIRTUALIZE(function()
+﻿return LPH_NO_VIRTUALIZE(function()
 	local settings_updated = false
 	local limited_esp_cache_result = false
 	local deepwoken_mesh_ids = require("@src/utility/deepwoken/deepwoken_meshes" .. "")
@@ -904,7 +904,7 @@ end;
 		esp.new(entity, "mob_esp")
 	end, true)
 
-	InstanceWatcher.new(workspace:WaitForChild("NPCs", 9e9), function(entity)
+	InstanceWatcher.new(workspace:WaitForChild("NPCs",5), function(entity)
 		return true
 	end, function(entity)
 		esp.new(entity, "npc_esp")
@@ -917,7 +917,7 @@ end;
 		end
 
 		connected = true
-		InstanceWatcher.new(workspace:WaitForChild("Ingredients", 9e9), function(entity)
+		InstanceWatcher.new(workspace:WaitForChild("Ingredients",5), function(entity)
 			return entity ~= nil
 		end, function(entity)
 			esp.new(entity, "ingredient_esp", function(self)
@@ -927,7 +927,7 @@ end;
 		end)
 	end, true)
 
-	InstanceWatcher.new(workspace:WaitForChild("Terrain", 9e9), function(entity)
+	InstanceWatcher.new(workspace:WaitForChild("Terrain",5), function(entity)
 		return entity:IsA("Attachment") and entity:WaitForChild("JobTrackerGui", 5)
 	end, function(entity)
 		esp.new(entity, "job_esp")
@@ -1106,4 +1106,5 @@ end;
 
 	return esp
 end)
+
 

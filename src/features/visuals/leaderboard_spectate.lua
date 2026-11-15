@@ -1,4 +1,4 @@
-
+﻿
 
 local feature = Feature:new("leaderboard_spectate"); 
 local camera = workspace.CurrentCamera
@@ -285,7 +285,7 @@ function feature:connect()
     end;
 
     local player_gui = local_player.instance:WaitForChild("PlayerGui",5);
-    player_gui:WaitForChild("LeaderboardGui", 9e9):WaitForChild("MainFrame", 9e9):WaitForChild("ScrollingFrame", 9e9);
+    player_gui:WaitForChild("LeaderboardGui",5):WaitForChild("MainFrame",5):WaitForChild("ScrollingFrame",5);
 
     wait_for_player_frame_map();
 
@@ -321,3 +321,4 @@ function feature:enable()
 end; 
 
 return feature
+

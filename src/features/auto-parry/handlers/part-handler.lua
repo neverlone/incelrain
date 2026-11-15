@@ -1,4 +1,4 @@
-local action_builder = require("@src/features/auto-parry/data/effect-action")
+﻿local action_builder = require("@src/features/auto-parry/data/effect-action")
 local projectile_timing_data = {}
 pcall(function()
 	projectile_timing_data = require("@src/features/auto-parry/data/projectile_timings")
@@ -113,7 +113,7 @@ local function debug_print(...)
 	setthreadidentity(8)
 	Logger:short_notify(string.format(...))
 end
-local thrown = workspace:WaitForChild("Thrown", 9e9);
+local thrown = workspace:WaitForChild("Thrown",5);
 aztup.maid:give_task(thrown.DescendantAdded:Connect(function(part)
 	
 	if not (aztup and aztup.flags and aztup_options and local_player) then return end

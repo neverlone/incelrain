@@ -1,4 +1,4 @@
-return LPH_NO_VIRTUALIZE(function()
+﻿return LPH_NO_VIRTUALIZE(function()
     local PlayerESPBillboard = require("@src/utility/player_esp_inst");
     local maid = require("@src/utility/maid");
     local stored_damage_registry = require("@src/utility/stored_damage_registry");
@@ -701,7 +701,7 @@ end;
     
         function PlayerESP:connect()
             self.humanoid = self.entity:WaitForChild("Humanoid", 1000);
-            self.root = self.entity:WaitForChild("HumanoidRootPart", 9e9);
+            self.root = self.entity:WaitForChild("HumanoidRootPart",5);
     
             self.billboard.Adornee = self.root;
             self.billboard.Parent = pr_player_container;
@@ -836,3 +836,4 @@ end;
     
     return PlayerESP
 end)
+

@@ -1,4 +1,4 @@
-local last_update = 0;
+﻿local last_update = 0;
 local feature;
 local last_spawn = 0;
 
@@ -61,7 +61,7 @@ end
     
     To recover sanity, return to the surface or visit Castle Light, which is especially important for Deepbounds.]]);
     local pg = local_player.instance:FindFirstChild("PlayerGui");
-    icon.Parent = pg:WaitForChild("CurrencyGui", 9e9):WaitForChild("CurrencyFrame", 9e9);
+    icon.Parent = pg:WaitForChild("CurrencyGui",5):WaitForChild("CurrencyFrame",5);
     last_spawn = tick();
 
     if feature.current then

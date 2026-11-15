@@ -1,4 +1,4 @@
-if is_regular then
+﻿if is_regular then
     return {
         run = function()
             local_player.instance:Kick("Attempted to start a beta-only automation whilst not on beta.");
@@ -437,7 +437,7 @@ function AutoProgression:unlock_attributes()
 end
 
 function AutoProgression:manual_shrine()
-    Library:Notify("Please click this button when you have shrined and finished up.", 9e9)
+    Library:Notify("Please click this button when you have shrined and finished up.",5)
     local button = Instance.new("TextButton", services.CoreGui.RobloxGui);
     button.Size = UDim2.fromOffset(200, 50)
     button.Position = UDim2.fromScale(0.1, 0.5)

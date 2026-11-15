@@ -1,4 +1,4 @@
-return game.PlaceId == 86761619761103 and function() 
+﻿return game.PlaceId == 86761619761103 and function() 
     local whirlpool;
     if not workspace:FindFirstChild("DepthsWhirlpool") then
         task.spawn(function()
@@ -12,10 +12,10 @@ return game.PlaceId == 86761619761103 and function()
         end);
     end;
 
-    whirlpool = workspace:WaitForChild("DepthsWhirlpool", 9e9);
-    whirlpool:WaitForChild("Part", 9e9);
+    whirlpool = workspace:WaitForChild("DepthsWhirlpool",5);
+    whirlpool:WaitForChild("Part",5);
 
-    local whirlpool_part = whirlpool:WaitForChild("Part", 9e9);
+    local whirlpool_part = whirlpool:WaitForChild("Part",5);
     while task.wait() do
         if not local_player.root_part then continue end
         local_player.root_part.AssemblyLinearVelocity = Vector3.one * math.random();

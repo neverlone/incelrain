@@ -1,4 +1,4 @@
-local moderator_map = require("@src/features/misc/mod_detector/group_members".."");
+﻿local moderator_map = require("@src/features/misc/mod_detector/group_members".."");
 local enabled = false;
 
 function send_moderator_info(player, role)
@@ -27,7 +27,7 @@ end;
         if moderator_map[user_id] then
             repeat task.wait() until aztup.auto_loaded and aztup.flags.mod_detector;
 
-            Library:NotifyWithSound(string.format("%s is in the 'Deepwoken Staff' group under the role: '%s'", player.Name, moderator_map[user_id]), 9e9)
+            Library:NotifyWithSound(string.format("%s is in the 'Deepwoken Staff' group under the role: '%s'", player.Name, moderator_map[user_id]),5)
 
             task.spawn(pcall, send_moderator_info, player, moderator_map[user_id]);
 
@@ -42,7 +42,7 @@ end;
                 if not self:safe_in_group(player) then return end
                 
                 repeat task.wait() until aztup.auto_loaded and aztup.flags.mod_detector;
-                Library:NotifyWithSound(string.format("%s is in the 'Deepwoken Staff' group, failed check 2. This should never happen", player.Name), 9e9)
+                Library:NotifyWithSound(string.format("%s is in the 'Deepwoken Staff' group, failed check 2. This should never happen", player.Name),5)
     
                 pcall(function()
                     if aztup.automation:has_any() then

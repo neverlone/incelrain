@@ -1,4 +1,4 @@
-
+﻿
 
 local outline = Drawing.new('Circle')
 local fov = Drawing.new('Circle')
@@ -215,8 +215,8 @@ end;
 
 function self.add_hooks()
     repeat task.wait() until local_player.character
-    local character_handler = local_player.character:WaitForChild("CharacterHandler", 9e9);
-    character_handler:WaitForChild("InputClient", 9e9);
+    local character_handler = local_player.character:WaitForChild("CharacterHandler",5);
+    character_handler:WaitForChild("InputClient",5);
 
     task.wait(1);
 
@@ -289,3 +289,4 @@ function self:disable()
 end;
 
 return self
+

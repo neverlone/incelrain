@@ -1,4 +1,4 @@
-local modded_parts = {};
+﻿local modded_parts = {};
 local feat;
 feat = Feature:new("vehicle_speed", game:GetService("RunService").Heartbeat, function(dt)
     local steering = EffectReplicator:FindEffect("Steering") or EffectReplicator:FindEffect("RootedGesture");
@@ -39,7 +39,7 @@ end
     if bv then
         bv.Velocity = move_direction.Magnitude > 0 and move_direction.Unit * aztup.flags.boat_speed or Vector3.zero;
         bv.P = move_direction.Magnitude > 0 and 9e9 or 0;
-        bv.MaxForce = move_direction.Magnitude > 0 and Vector3.new(9e9, 9e9, 9e9) or Vector3.zero;
+        bv.MaxForce = move_direction.Magnitude > 0 and Vector3.new(9e9,5,5) or Vector3.zero;
     end;
 
     for _, part in ship:GetDescendants() do
@@ -71,3 +71,4 @@ function feat:disable()
 end
 
 return feat
+
