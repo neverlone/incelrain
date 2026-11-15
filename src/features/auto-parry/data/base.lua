@@ -1,12 +1,14 @@
-local ht = services.HttpService; local jd = ht.JSONDecode; local tbl;
+local ht = services.HttpService; local jd = ht.JSONDecode; local tbl = {};
 local extra_data = LPH_NO_VIRTUALIZE(function() 
     function decode_asset(asset)
          local decoded = services.EncodingService:Base64Decode(buffer.fromstring(asset));
          local decompress = services.EncodingService:DecompressBuffer(decoded, Enum.CompressionAlgorithm.Zstd);
          return buffer.tostring(decompress)    
 end;
-    tbl = jd(ht, decode_asset(inline_asset_b96("@assets/base.json")));
-    return jd(ht, decode_asset(inline_asset_b96("@assets/extra_data.json")))
+    local ok_base, res_base = pcall(function() return jd(ht, decode_asset(inline_asset_b96("@assets/base.json"))) end);
+    tbl = (ok_base and typeof(res_base) == "table" and res_base) or {};
+    local ok_extra, res_extra = pcall(function() return jd(ht, decode_asset(inline_asset_b96("@assets/extra_data.json"))) end);
+    return (ok_extra and typeof(res_extra) == "table" and res_extra) or {}
 end)()
 LPH_NO_VIRTUALIZE(function() for k,v in extra_data do tbl[k] = v end; end)();
 tbl['AbyssalRidge'] = (function() 

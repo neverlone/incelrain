@@ -203,7 +203,8 @@ local function rain_require(target)
     end
 
     if module_cache[rel_path] ~= nil then
-        return module_cache[rel_path]
+        local cached = module_cache[rel_path]
+        return table.unpack(cached, 1, cached.n)
     end
 
     local code = read_source_file(rel_path)
@@ -216,13 +217,14 @@ local function rain_require(target)
         error(string.format("[Project Rain] Syntax error in module '%s': %s", rel_path, tostring(syntax_err)))
     end
 
-    local success, result = pcall(chunk)
-    if not success then
-        error(string.format("[Project Rain] Runtime error executing module '%s': %s", rel_path, tostring(result)))
+    local packed = table.pack(pcall(chunk))
+    if not packed[1] then
+        error(string.format("[Project Rain] Runtime error executing module '%s': %s", rel_path, tostring(packed[2])))
     end
 
-    module_cache[rel_path] = result
-    return result
+    local results = table.pack(table.unpack(packed, 2, packed.n))
+    module_cache[rel_path] = results
+    return table.unpack(results, 1, results.n)
 end
 
 getgenv().require = rain_require
