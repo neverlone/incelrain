@@ -167,7 +167,6 @@ struct = automation_struct:construct({
                                 }
                                 game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
                             until not local_player.instance.PlayerGui.DialogueGui.Enabled
-                                end;
                                 
                                 local crates = {};
                                 for _, crate in destructibles:GetChildren() do
@@ -189,7 +188,6 @@ struct = automation_struct:construct({
                                     end;
                                     aztup.features.m1_hold.held = false;
                                 end;
-                            end;
                             
                             repeat 
                                 task.wait()
