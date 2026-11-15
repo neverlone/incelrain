@@ -24,6 +24,11 @@ env["AUTH_GET_CONSTANT"] = function(...)
     return ...
 end 
 
+env["STR_TBL_SF_INVOKE"] = function(...)
+    return ...
+end
+getgenv().STR_TBL_SF_INVOKE = env["STR_TBL_SF_INVOKE"] 
+
 local services;
 LPH_NO_VIRTUALIZE(function()
     local service_cache = {}

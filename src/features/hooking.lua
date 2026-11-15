@@ -1,6 +1,8 @@
 
 
 
+local STR_TBL_SF_INVOKE = rawget(getfenv(), "STR_TBL_SF_INVOKE") or getgenv().STR_TBL_SF_INVOKE or function(x) return x end
+
 if game.PlaceId == 4111023553 then return true end
 
 Logger.log_for_devs("beginning anticheat bypass...");

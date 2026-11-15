@@ -36,7 +36,15 @@ env.LPH_NO_VIRTUALIZE = function(f) return f end
 env.LPH_ENCSTR = function(str) return str end
 env.AUTH_GET_CONSTANT = function(...) return ... end
 env.PROT_OBF_STR_SAFE_MACRO = function(...) return ... end
+env.STR_TBL_SF_INVOKE = function(...) return ... end
 env.LRM_ScriptName = "Project Rain"
+
+if not env.appendfile and type(writefile) == "function" and type(readfile) == "function" then
+    env.appendfile = function(path, content)
+        local existing = (type(isfile) == "function" and isfile(path)) and readfile(path) or ""
+        writefile(path, existing .. content)
+    end
+end
 
 -- ============================================================================
 -- 2. Virtual Module Resolver & File Fetcher
