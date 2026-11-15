@@ -1,4 +1,4 @@
-﻿return LPH_NO_VIRTUALIZE(function()
+return LPH_NO_VIRTUALIZE(function()
 	local settings_updated = false
 	local limited_esp_cache_result = false
 	local deepwoken_mesh_ids = require("@src/utility/deepwoken/deepwoken_meshes" .. "")

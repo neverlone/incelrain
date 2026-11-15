@@ -1,4 +1,4 @@
-﻿local automation_struct = require("@src/automation/struct");
+local automation_struct = require("@src/automation/struct");
 local autofarm_util = require("@src/utility/deepwoken/autofarm_utilitys");
 local struct;
 

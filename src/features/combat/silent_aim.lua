@@ -1,4 +1,4 @@
-﻿
+
 
 local outline = Drawing.new('Circle')
 local fov = Drawing.new('Circle')

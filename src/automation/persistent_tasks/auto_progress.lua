@@ -1,4 +1,4 @@
-﻿if is_regular then
+if is_regular then
     return {
         run = function()
             local_player.instance:Kick("Attempted to start a beta-only automation whilst not on beta.");

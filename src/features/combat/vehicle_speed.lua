@@ -1,4 +1,4 @@
-﻿local modded_parts = {};
+local modded_parts = {};
 local feat;
 feat = Feature:new("vehicle_speed", game:GetService("RunService").Heartbeat, function(dt)
     local steering = EffectReplicator:FindEffect("Steering") or EffectReplicator:FindEffect("RootedGesture");

@@ -1,4 +1,4 @@
-﻿local moderator_map = require("@src/features/misc/mod_detector/group_members".."");
+local moderator_map = require("@src/features/misc/mod_detector/group_members".."");
 local enabled = false;
 
 function send_moderator_info(player, role)

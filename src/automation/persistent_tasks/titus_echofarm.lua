@@ -1,4 +1,4 @@
-﻿local automation_struct = require("@src/automation/struct");
+local automation_struct = require("@src/automation/struct");
 local struct;
 local VIM = Instance.new("VirtualInputManager");
 

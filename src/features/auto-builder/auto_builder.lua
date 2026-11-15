@@ -1,4 +1,4 @@
-﻿
+
 -- Safely load DataReplication, fallback to stub if not present (e.g., nonâ€‘Deepwoken place)
 local data_replication
 do

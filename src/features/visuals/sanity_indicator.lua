@@ -1,4 +1,4 @@
-﻿local last_update = 0;
+local last_update = 0;
 local feature;
 local last_spawn = 0;
 

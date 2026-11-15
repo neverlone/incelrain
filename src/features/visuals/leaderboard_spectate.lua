@@ -1,4 +1,4 @@
-﻿
+
 
 local feature = Feature:new("leaderboard_spectate"); 
 local camera = workspace.CurrentCamera

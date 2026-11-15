@@ -1,4 +1,4 @@
-﻿return function()
+return function()
     if replicatesignal then
         replicatesignal(local_player.instance.Kill)
         task.delay(1, function()

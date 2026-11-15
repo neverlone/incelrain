@@ -1,4 +1,4 @@
-﻿local action_builder = require("@src/features/auto-parry/data/effect-action")
+local action_builder = require("@src/features/auto-parry/data/effect-action")
 local projectile_timing_data = {}
 pcall(function()
 	projectile_timing_data = require("@src/features/auto-parry/data/projectile_timings")

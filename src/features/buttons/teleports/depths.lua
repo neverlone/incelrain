@@ -1,4 +1,4 @@
-﻿return game.PlaceId == 86761619761103 and function() 
+return game.PlaceId == 86761619761103 and function() 
     local whirlpool;
     if not workspace:FindFirstChild("DepthsWhirlpool") then
         task.spawn(function()

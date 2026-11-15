@@ -1,4 +1,4 @@
-﻿return LPH_NO_VIRTUALIZE(function()
+return LPH_NO_VIRTUALIZE(function()
     local PlayerESPBillboard = require("@src/utility/player_esp_inst");
     local maid = require("@src/utility/maid");
     local stored_damage_registry = require("@src/utility/stored_damage_registry");

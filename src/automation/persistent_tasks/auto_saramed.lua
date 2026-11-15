@@ -1,4 +1,4 @@
-﻿--!nocheck
+--!nocheck
 if is_regular then
     return {
         run = function()
