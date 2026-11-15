@@ -62,6 +62,18 @@ local auto_voi = {
         root.AssemblyLinearVelocity = Vector3.zero;
     end,
 
+    autoM1 = function(self, toggle)
+        if not toggle then
+            aztup.features.m1_hold.held = false;
+            aztup.flags.no_aerials = false;
+            return;
+        end
+        aztup.features.m1_hold.held = true;
+        aztup.flags.no_aerials = true;
+    end,
+};
+
+function auto_voi:generic_humanoid_fight(name, flag)
     repeat task.wait() until workspace.Live:FindFirstChild(name);
     repeat task.wait() until workspace.Live:FindFirstChild(name) and workspace.Live:FindFirstChild(name):FindFirstChild("HumanoidRootPart");
 

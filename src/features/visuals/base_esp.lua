@@ -842,25 +842,26 @@ end;
 		end)
 	end
 
-	InstanceWatcher.new(workspace:WaitForChild("Thrown",5), function(entity)
+	local thrown_folder = workspace:FindFirstChild("Thrown") or workspace:WaitForChild("Thrown", 1)
+	InstanceWatcher.new(thrown_folder, function(entity)
 		return entity.Name == "BigArtifact" and #entity:GetChildren() > 0
 	end, function(entity)
 		esp.new(entity, "artifact_esp")
 	end, true)
 	
-	InstanceWatcher.new(workspace:WaitForChild("Thrown",5), function(entity)
+	InstanceWatcher.new(thrown_folder, function(entity)
 		return entity.Name == "EventFeatherRef"
 	end, function(entity)
 		esp.new(entity, "owl_esp")
 	end, true)
 
-	InstanceWatcher.new(workspace:WaitForChild("Thrown",5), function(entity)
+	InstanceWatcher.new(thrown_folder, function(entity)
 		return entity.Name == "Chest" or entity:WaitForChild("Lid", 2.5)
 	end, function(entity)
 		esp.new(entity, "chest_esp")
 	end, true)
 
-	InstanceWatcher.new(workspace:WaitForChild("Thrown",5), function(entity)
+	InstanceWatcher.new(thrown_folder, function(entity)
 		local names = { "BagDrop", "ExplodeCrate", "MinistryCacheIndicator", "Campfire", "BellMeteor" }
 		return table.find(names, entity.Name) ~= nil
 	end, function(entity)
@@ -874,19 +875,19 @@ end;
 		esp.new(entity, flags[entity.Name])
 	end, true)
 
-	InstanceWatcher.new(workspace:WaitForChild("Destructibles",5), function(entity)
+	InstanceWatcher.new(workspace:FindFirstChild("Destructibles") or workspace:WaitForChild("Destructibles", 1), function(entity)
 		return entity.Name == "Campfire"
 	end, function(entity)
 		esp.new(entity, "campfire_esp")
 	end, true)
 
-	InstanceWatcher.new(workspace:WaitForChild("Mechanisms",5), function(entity)
+	InstanceWatcher.new(workspace:FindFirstChild("Mechanisms") or workspace:WaitForChild("Mechanisms", 1), function(entity)
 		return entity.Name == "JettyPost"
 	end, function(entity)
 		esp.new(entity, "jetty_post_esp")
 	end, true)
 
-	InstanceWatcher.new(workspace:WaitForChild("Shops",5), function(entity)
+	InstanceWatcher.new(workspace:FindFirstChild("Shops") or workspace:WaitForChild("Shops", 1), function(entity)
 		return entity:IsA("BasePart")
 	end, function(entity)
 		esp.new(entity, "shop_esp")
@@ -898,13 +899,13 @@ end;
 		esp.new(entity, "banner_esp")
 	end, true)
 
-	InstanceWatcher.new(workspace:WaitForChild("Live",5), function(entity)
+	InstanceWatcher.new(workspace:FindFirstChild("Live") or workspace:WaitForChild("Live", 1), function(entity)
 		return entity.Name:sub(1, 1) == "." and not entity.Name:match("watcher")
 	end, function(entity)
 		esp.new(entity, "mob_esp")
 	end, true)
 
-	InstanceWatcher.new(workspace:WaitForChild("NPCs",5), function(entity)
+	InstanceWatcher.new(workspace:FindFirstChild("NPCs") or workspace:WaitForChild("NPCs", 1), function(entity)
 		return true
 	end, function(entity)
 		esp.new(entity, "npc_esp")
@@ -917,7 +918,7 @@ end;
 		end
 
 		connected = true
-		InstanceWatcher.new(workspace:WaitForChild("Ingredients",5), function(entity)
+		InstanceWatcher.new(workspace:FindFirstChild("Ingredients") or workspace:WaitForChild("Ingredients", 1), function(entity)
 			return entity ~= nil
 		end, function(entity)
 			esp.new(entity, "ingredient_esp", function(self)
@@ -927,7 +928,7 @@ end;
 		end)
 	end, true)
 
-	InstanceWatcher.new(workspace:WaitForChild("Terrain",5), function(entity)
+	InstanceWatcher.new(workspace:FindFirstChild("Terrain") or workspace:WaitForChild("Terrain", 1), function(entity)
 		return entity:IsA("Attachment") and entity:WaitForChild("JobTrackerGui", 5)
 	end, function(entity)
 		esp.new(entity, "job_esp")
@@ -971,8 +972,10 @@ end;
 		end)
 	end
 
+	local marker_ws = services.ReplicatedStorage:FindFirstChild("MarkerWorkspace") or services.ReplicatedStorage:WaitForChild("MarkerWorkspace", 1)
+	local area_markers = marker_ws and (marker_ws:FindFirstChild("AreaMarkers") or marker_ws:WaitForChild("AreaMarkers", 1))
 	for _, v in
-		pairs(services.ReplicatedStorage:WaitForChild("MarkerWorkspace",5):WaitForChild("AreaMarkers",5):GetChildren())
+		pairs(area_markers and area_markers:GetChildren() or {})
 	do
 		if v.Name:match("'s Base") or not v:FindFirstChild("AreaMarker") then
 			continue

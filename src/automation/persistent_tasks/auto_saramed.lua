@@ -220,7 +220,7 @@ local autosaramed = {
             self.playerSafeTween(self, wellCF, 170)
             
             local VIM = Instance.new('VirtualInputManager')
-            
+        end
     end,
     
     readyWeapon = function()
@@ -670,6 +670,10 @@ function autosaramed:resetDungeon()
     VIM:SendKeyEvent(false, Enum.KeyCode.E, false, game);
     
     task.wait(1)
+end
+
+return automation_struct:construct({
+    persistent_data_store = 'auto_saramed_store',
     persistent_data_flag = 'auto_saramed',
     id = 'auto_saramed',
     

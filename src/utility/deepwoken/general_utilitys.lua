@@ -2,8 +2,8 @@
 
 local general = {}; 
 local rep = game:GetService("ReplicatedStorage");
-local modules = rep:WaitForChild("Modules", 3);
-local cu_obj = modules and modules:WaitForChild("CollisionUtils", 3);
+local modules = rep:FindFirstChild("Modules") or rep:WaitForChild("Modules", 0.5);
+local cu_obj = modules and (modules:FindFirstChild("CollisionUtils") or modules:WaitForChild("CollisionUtils", 0.5));
 local collision_utils = {
     Raycast = function() return nil end,
     solidParams = RaycastParams.new()
@@ -299,7 +299,7 @@ end;
     return false
 end;
 
-local kb_inst = rep:WaitForChild("KeyBinds", 3);
+local kb_inst = rep:FindFirstChild("KeyBinds") or rep:WaitForChild("KeyBinds", 0.5);
 local Keybinds = {
     IsActionHeld = function(action) return false end
 };

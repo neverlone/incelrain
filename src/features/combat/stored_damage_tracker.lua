@@ -8,7 +8,17 @@
 
 local feature = Feature:new("show_stored_damage");
 local stored_damage_registry = require("@src/utility/stored_damage_registry");
-local DataReplication = require(services.ReplicatedStorage.Info.DataReplication);
+local DataReplication;
+local function get_data_replication()
+	if DataReplication then return DataReplication end
+	local info = services.ReplicatedStorage:FindFirstChild("Info");
+	local dr = info and info:FindFirstChild("DataReplication");
+	if dr then
+		local ok, mod = pcall(require, dr);
+		if ok then DataReplication = mod end
+	end
+	return DataReplication
+end
 
 local function get_closest(poser_attacker)
 	local value = poser_attacker.Value;
@@ -106,7 +116,11 @@ function feature:enable()
 		end;
 
 		if is_pve then
-			damage_done *= 1 + (DataReplication.GetData().Level * 0.26);
+			local dr = get_data_replication();
+			local dr_data = dr and dr.GetData and dr.GetData();
+			if dr_data and dr_data.Level then
+				damage_done *= 1 + (dr_data.Level * 0.26);
+			end
 		end;
 
 		local humanoid = target:FindFirstChildOfClass("Humanoid");

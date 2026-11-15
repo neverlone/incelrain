@@ -126,6 +126,18 @@ local layertwo = {
                     self.temp_tween(targetchest.Lid.CFrame, 170)
                 end)
                 moreSecondsWaited += .1
+            until local_player.instance.PlayerGui:FindFirstChild('ChoicePrompt') or moreSecondsWaited >= moreTime
+
+            repeat task.wait(.1); secondsWaited += .1; until not local_player.instance.PlayerGui:FindFirstChild('ChoicePrompt') or secondsWaited >= time
+        end
+    end,
+    grab_nearest_chest = function(self)
+        local closest = nil
+        for _, chest in pairs(workspace.Thrown:GetChildren()) do
+            if not chest:FindFirstChild("Lid") then continue end
+            if closest == nil then
+                closest = chest
+            else
                 local closestDist = (local_player.root_part.Position - closest.Lid.Position).Magnitude
                 local chestDist = (local_player.root_part.Position - chest.Lid.Position).Magnitude
                 

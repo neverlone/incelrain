@@ -2,8 +2,8 @@ local ingredients = workspace:FindFirstChild("Ingredients");
 local npcs = workspace:FindFirstChild("NPCs");
 local live = workspace:FindFirstChild("Live");
 
-local requests = services.ReplicatedStorage:WaitForChild("Requests",5);
-local send_dialogue = requests and requests:WaitForChild("SendDialogue",5);
+local requests = services.ReplicatedStorage:FindFirstChild("Requests");
+local send_dialogue = requests and requests:FindFirstChild("SendDialogue");
 
 function safe_tween(tween)
     if aztup.maid.objective_tween then aztup.maid.objective_tween.stop() end
@@ -12,6 +12,9 @@ function safe_tween(tween)
     aztup.maid.objective_tween = nil
 end
 function close_prompt()
+    requests = requests or services.ReplicatedStorage:FindFirstChild("Requests") or services.ReplicatedStorage:WaitForChild("Requests", 2);
+    send_dialogue = send_dialogue or (requests and (requests:FindFirstChild("SendDialogue") or requests:WaitForChild("SendDialogue", 2)));
+    if not send_dialogue then return end
     local start = tick();
 
     while tick() - start < 2 do

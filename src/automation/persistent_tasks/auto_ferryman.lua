@@ -36,6 +36,17 @@ local function invoke_choice(prompt, value)
         choice:InvokeServer(value);
     end);
 end
+
+local function prompt_title(prompt)
+    prompt = prompt or get_choice_prompt();
+    local choice_frame = prompt and prompt:FindFirstChild("ChoiceFrame");
+    local title = choice_frame and choice_frame:FindFirstChild("Title");
+    return title and title.Text;
+end
+
+local function set_choice_slider(prompt, amount)
+    prompt = prompt or get_choice_prompt();
+    local choice_frame = prompt and prompt:FindFirstChild("ChoiceFrame");
     local desc_sheet = choice_frame and choice_frame:FindFirstChild("DescSheet");
     local slider_sheet = desc_sheet and desc_sheet:FindFirstChild("SliderSheet");
     local slider = slider_sheet and slider_sheet:FindFirstChild("GenericSlider");
@@ -1376,6 +1387,19 @@ function autoferryman:kill_ferryman()
     persistent_data:set('ferryman_rounds_completed', (persistent_data:get('ferryman_rounds_completed', 0) or 0) + 1);
 
     -- Leave instance
+    self.server_hop();
+end
+
+local struct;
+struct = automation_struct:construct({
+    persistent_data_store = 'auto_ferryman_store',
+    persistent_data_flag = 'auto_ferryman',
+    id = 'auto_ferryman',
+    
+    state_machine = StateMachine.create({
+        initial = "idle",
+        events = {
+            {name = 'start',    from = 'idle', to = '_check_area'},
             {name = 'refill',   from = '_check_area', to = '_refill'},
             {name = 'initiate', from = '_check_area', to = '_initiate'},
             {name = 'initiate', from = '_refill', to = '_initiate'},

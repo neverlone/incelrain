@@ -65,7 +65,10 @@ local autoduke = {
             local hmrp = player.Character.HumanoidRootPart
             
             local dist = (target - player.Character:GetPivot().Position).Magnitude
-            
+            if dist <= mag then return true end
+        end
+        return false
+    end,
     m1_hold = function(toggle)
         if not toggle then
             hold_m1 = false
@@ -297,16 +300,7 @@ function autoduke:kill_duke()
     end)
 
     local done = false;
-
-                task.wait();
-            end
-
-            done = false;
-        end
-        if not persistent_data:get("auto_duke") then break; end
-
-    end
-            if not persistent_data:get("auto_duke") then return; end
+    if not persistent_data:get("auto_duke") then return; end
 
     self:m1_hold(false);
 

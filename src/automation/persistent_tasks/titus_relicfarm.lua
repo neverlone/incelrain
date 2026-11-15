@@ -568,7 +568,19 @@ struct = automation_struct:construct({
                                     if autotitus.ful() then
                                         pcall(function() Logger:short_notify("Bank full, Titus farm stopped.") end)
                                         pcall(function() aztup.automation:set("auto_titus", false) end)
-                bank_ran = true;
+                                        autotitus.mnu()
+                                        return
+                                    end
+                                    autotitus.sub()
+                                    task.wait(0.25)
+                                until autotitus.cnt(bkn) < c0 or tick() - bt > 8
+                                task.wait(0.5)
+                            end
+                        end
+                    end
+                end
+                self:continuation()
+                --[[bank_ran = true;
                 local done_banking = false;
                 function start_bank()
                 

@@ -1,7 +1,9 @@
 local self = Feature:new("no_clouds");
 
 function self:remove_clouds()
-    local weather_markers = services.ReplicatedStorage:WaitForChild("MarkerWorkspace",5):WaitForChild("WeatherMarkers", math.huge);
+    local marker_ws = services.ReplicatedStorage:FindFirstChild("MarkerWorkspace") or services.ReplicatedStorage:WaitForChild("MarkerWorkspace", 5);
+    local weather_markers = marker_ws and marker_ws:WaitForChild("WeatherMarkers", 5);
+    if not weather_markers then return end
     for _, item in weather_markers:GetChildren() do
         item:Destroy();
     end;

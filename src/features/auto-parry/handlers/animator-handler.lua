@@ -96,7 +96,7 @@ return LPH_NO_VIRTUALIZE(function()
     local last_mid_attack_delay = 0;
     local AnimatorHandler = {};
     AnimatorHandler.__index = AnimatorHandler;
-    local kb_obj = game:GetService("ReplicatedStorage"):WaitForChild("KeyBinds", 3);
+    local kb_obj = game:GetService("ReplicatedStorage"):FindFirstChild("KeyBinds") or game:GetService("ReplicatedStorage"):WaitForChild("KeyBinds", 1);
     local Keybinds = { IsActionHeld = function() return false end };
     if kb_obj and typeof(base_require) == "function" then
         local ok, res = pcall(base_require, kb_obj);
@@ -122,14 +122,15 @@ return LPH_NO_VIRTUALIZE(function()
     local allAnimations = {};
     local mobsAnims = {};
     do
-        local animsFolder = services.ReplicatedStorage:WaitForChild("Assets",5):WaitForChild("Anims",5);
-        local mobsAnimsFolder = animsFolder:WaitForChild("Mobs",5);
+        local assetsFolder = services.ReplicatedStorage:FindFirstChild("Assets") or services.ReplicatedStorage:WaitForChild("Assets", 1);
+        local animsFolder = assetsFolder and (assetsFolder:FindFirstChild("Anims") or assetsFolder:WaitForChild("Anims", 1));
+        local mobsAnimsFolder = animsFolder and (animsFolder:FindFirstChild("Mobs") or animsFolder:WaitForChild("Mobs", 1));
 
         local match, format = string.match, string.format;
 
         
-        local mobAnimObjects = mobsAnimsFolder:QueryDescendants("Animation");
-        local allAnimObjects = animsFolder:QueryDescendants("Animation");
+        local mobAnimObjects = mobsAnimsFolder and mobsAnimsFolder:QueryDescendants("Animation") or {};
+        local allAnimObjects = animsFolder and animsFolder:QueryDescendants("Animation") or {};
 
         
         

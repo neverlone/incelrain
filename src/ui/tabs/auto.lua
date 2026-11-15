@@ -710,22 +710,22 @@ end
 
         for _, bool in pairs(bools) do
             if persistent_data:get(bool, false) then
-                if bool == "auto_layertwo_turn_in_medallions" then
+                if bool == "auto_layertwo_turn_in_medallions" and aztup_options.auto_layertwo_options then
                     aztup_options.auto_layertwo_options.Value["Turn In Medallions"] = true;
                     aztup_options.auto_layertwo_options:SetValue(aztup_options.auto_layertwo_options.Value)
-                elseif bool == "auto_layertwo_killed_chaser" then
+                elseif bool == "auto_layertwo_killed_chaser" and aztup_options.auto_layertwo_options then
                     aztup_options.auto_layertwo_options.Value["Use Skip (requires chaser kills)"] = true;
                     aztup_options.auto_layertwo_options:SetValue(aztup_options.auto_layertwo_options.Value)
-                elseif bool == "auto_layertwo_allow_loops" then
+                elseif bool == "auto_layertwo_allow_loops" and aztup_options.auto_layertwo_options then
                     aztup_options.auto_layertwo_options.Value["Allow Loops"] = true;
                     aztup_options.auto_layertwo_options:SetValue(aztup_options.auto_layertwo_options.Value)
-                elseif bool == "auto_titus_wipe_char" then
+                elseif bool == "auto_titus_wipe_char" and aztup_options.relic_farm_options then
                     aztup_options.relic_farm_options.Value["Wipe Character"] = true;
                     aztup_options.relic_farm_options:SetValue(aztup_options.relic_farm_options.Value)
-                elseif bool == "use_guild" then
+                elseif bool == "use_guild" and aztup_options.note_farm_options then
                     aztup_options.note_farm_options.Value["Use Guild"] = true;
                     aztup_options.note_farm_options:SetValue(aztup_options.note_farm_options.Value)
-                elseif bool == "auto_duke_voids" then
+                elseif bool == "auto_duke_voids" and aztup_options.auto_duke_options then
                     aztup_options.auto_duke_options.Value["Void Duke (No EXP, only loot)"] = true;
                     aztup_options.auto_duke_options:SetValue(aztup_options.auto_duke_options.Value)
                 end
@@ -827,13 +827,14 @@ function automation:create()
     self:make_general();
     self:make_webhooks();
     self:make_autoloot();
-    self:make_config();
 
     if not is_regular then
         self:make_farms();
     else
         self:make_non_locked_farms();
     end;
+
+    self:make_config();
 end
 
 return function(tab, groupbox)

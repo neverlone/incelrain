@@ -54,7 +54,7 @@ end
 -- ============================================================================
 -- 2. Virtual Module Resolver & File Fetcher
 -- ============================================================================
-env._RAIN_MODULE_CACHE = env._RAIN_MODULE_CACHE or {}
+env._RAIN_MODULE_CACHE = {}
 local module_cache = env._RAIN_MODULE_CACHE
 
 local function read_source_file(rel_path)
@@ -82,7 +82,7 @@ local function read_source_file(rel_path)
     -- 2. Try remote HttpGet
     if CONFIG.REMOTE_URL and CONFIG.REMOTE_URL ~= "" then
         local url_path = rel_path:gsub(" ", "%%20")
-        local remote_url = CONFIG.REMOTE_URL .. url_path
+        local remote_url = CONFIG.REMOTE_URL .. url_path .. "?cb=" .. tostring(math.floor(tick()))
         local success, content = pcall(game.HttpGet, game, remote_url)
         if success and content and not content:find("404: Not Found") then
             return content

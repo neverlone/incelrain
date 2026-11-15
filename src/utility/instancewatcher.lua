@@ -10,6 +10,10 @@ local InstanceWatcher = {} do
         self.match_function = match_function;
         self.callback_function = callback_function;
 
+        if not parent_instance then
+            return self
+        end
+
         aztup.maid:give_task(self.parent_instance.ChildAdded:Connect(function(child_instance)
             if self.match_function(child_instance) then
                 self.callback_function(child_instance)

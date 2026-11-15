@@ -3,7 +3,8 @@
 local feature = {};
 
 local clientPart = Instance.new('Part', workspace)
-local peer = gethiddenproperty(clientPart, "NetworkOwnerV3")
+local ok_peer, peer = pcall(gethiddenproperty, clientPart, "NetworkOwnerV3")
+if not ok_peer then peer = nil end
 clientPart:Destroy()
 
 function feature:owner(part)
@@ -17,10 +18,12 @@ function feature:owner(part)
 end
 
 function feature:run()
-	sethiddenproperty(local_player.instance, "MaxSimulationRadius", 3000);
-	sethiddenproperty(local_player.instance, "SimulationRadius", 3000);
+	pcall(sethiddenproperty, local_player.instance, "MaxSimulationRadius", 3000);
+	pcall(sethiddenproperty, local_player.instance, "SimulationRadius", 3000);
 
-    for _, mob in pairs(workspace.Live:GetChildren()) do
+    local live = workspace:FindFirstChild("Live")
+    if not live then return end
+    for _, mob in pairs(live:GetChildren()) do
         if mob.Name:sub(1,1) ~= "." then continue end
 
         local root = mob:FindFirstChild("HumanoidRootPart");

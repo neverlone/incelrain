@@ -193,7 +193,9 @@ function autoescape:beginTrial()
 
     autofarm_util:ReadyWeapon(true);
 
-    local dialogue = game:GetService("ReplicatedStorage").Requests.SendDialogue;
+    local dialogue = game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5);
+    if hard then
+        local buff_prompt = workspace:FindFirstChild("DepthsTrial") and workspace.DepthsTrial:FindFirstChild("InteractPrompt", true);
         if buff_prompt then
             pcall(function()
                 fireproximityprompt(buff_prompt);
@@ -247,6 +249,8 @@ function autoescape:fightTrial()
         end
     end);
 
+    if self.foundMobs() then
+        repeat
             self:healCheck();
 
             pcall(function()

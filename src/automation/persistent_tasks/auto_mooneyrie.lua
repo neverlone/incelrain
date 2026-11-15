@@ -260,6 +260,7 @@ function moonseyrie:handle()
         VIM:SendKeyEvent(true, Enum.KeyCode.E, false, game);
         task.wait(0.1);
         VIM:SendKeyEvent(false, Enum.KeyCode.E, false, game);
+    end
     
     repeat task.wait(); moons_eye_door = workspace:FindFirstChild('MoonseyeDoor') until moons_eye_door
     

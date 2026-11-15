@@ -113,7 +113,8 @@ local function debug_print(...)
 	setthreadidentity(8)
 	Logger:short_notify(string.format(...))
 end
-local thrown = workspace:WaitForChild("Thrown",5);
+local thrown = workspace:FindFirstChild("Thrown") or workspace:WaitForChild("Thrown", 1);
+if not thrown then return end
 aztup.maid:give_task(thrown.DescendantAdded:Connect(function(part)
 	
 	if not (aztup and aztup.flags and aztup_options and local_player) then return end

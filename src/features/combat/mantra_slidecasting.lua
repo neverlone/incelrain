@@ -1,6 +1,6 @@
 
 local feature = Feature:new("mantra_slidecasting");
-local kb_obj = game:GetService("ReplicatedStorage"):WaitForChild("KeyBinds", 3);
+local kb_obj = game:GetService("ReplicatedStorage"):FindFirstChild("KeyBinds") or game:GetService("ReplicatedStorage"):WaitForChild("KeyBinds", 0.5);
 local Keybinds = { IsActionHeld = function() return false end };
 if kb_obj and typeof(base_require) == "function" then
     local ok, res = pcall(base_require, kb_obj);

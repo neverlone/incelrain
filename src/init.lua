@@ -312,8 +312,8 @@ chance_store = require("@src/features/auto-parry/data/chance_store")
 getgenv().chance_store = chance_store;
 require(LPH_ENCSTR("@src/ui/ui")).initialize();
 
-require("@src/features/visuals/player_esp")();
-require("@src/features/visuals/base_esp")();
+task.spawn(pcall, require("@src/features/visuals/player_esp"));
+task.spawn(pcall, require("@src/features/visuals/base_esp"));
 
 if not fflags:get("dont_notify_on_first_exec") and aztup.silent_mode then
     if not persistent_data:get("has_executed_before") then

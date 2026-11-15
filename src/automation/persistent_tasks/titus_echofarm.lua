@@ -214,7 +214,11 @@ function autotitus:getechoes()
         --        task.wait(0.2)
         --    end
         --end
-        end
+    end
+end
+
+function autotitus:runDungeon()
+    task.spawn(function()
         pcall(function() 
             base_require(services.ReplicatedStorage.Info.RealmInfo).IsDepths = true;
         end)
@@ -249,6 +253,15 @@ function autotitus:getechoes()
             self.serverHop();
             while task.wait() do end
         end
+    until finished or not aztup.automation:has_any();
+
+    if conn then conn:Disconnect(); end
+    task.wait(0.5);
+    pcall(function()
+        self:grabChest();
+        self:getechoes();
+    end);
+end
 
 local state_machine = StateMachine.create({
     initial = "idle",

@@ -22,7 +22,7 @@ end
 
 local last_parry_at = tick()
 
-local thrown = workspace:FindFirstChild("Thrown") or workspace:WaitForChild("Thrown", 10)
+local thrown = workspace:FindFirstChild("Thrown") or workspace:WaitForChild("Thrown", 1)
 if thrown then
 	aztup.maid:give_task(thrown.ChildAdded:Connect(LPH_NO_VIRTUALIZE(function(part)
 		if not (aztup and aztup.flags and aztup.flags.auto_parry) then

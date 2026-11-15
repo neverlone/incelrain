@@ -1,7 +1,7 @@
 local action_builder = require("@src/features/auto-parry/data/effect-action")
 
-local requests = services.ReplicatedStorage:FindFirstChild("Requests") or services.ReplicatedStorage:WaitForChild("Requests",5);
-local client_effect = requests:FindFirstChild("ClientEffect") or requests:WaitForChild("ClientEffect",5)
+local requests = services.ReplicatedStorage:FindFirstChild("Requests") or services.ReplicatedStorage:WaitForChild("Requests", 1);
+local client_effect = requests and (requests:FindFirstChild("ClientEffect") or requests:WaitForChild("ClientEffect", 1));
 
 local effect_names = {}
 local effect_data_map = {}
@@ -26,6 +26,7 @@ local function debug_print(...)
 	setthreadidentity(8)
 	Logger:short_notify(string.format(...))
 end
+if not client_effect then return end
 aztup.maid:give_task(client_effect.OnClientEvent:Connect(function(effectName, effectData)
 	
 	if not (aztup and aztup.flags and aztup_options and local_player) then return end
