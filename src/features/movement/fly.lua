@@ -3,7 +3,14 @@ local bv = Instance.new("BodyVelocity");
 bv.Name = "SlideVel";
 bv.MaxForce = Vector3.new(1000000, 1000000, 1000000);
 bv:AddTag("AllowedBM");
-local collision_utils = base_require(game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("CollisionUtils"));
+local rep = game:GetService("ReplicatedStorage");
+local mods = rep:WaitForChild("Modules", 3);
+local cu_obj = mods and mods:WaitForChild("CollisionUtils", 3);
+local collision_utils = (env and env.general and env.general.collision_utils) or {};
+if cu_obj and typeof(base_require) == "function" then
+    local ok, res = pcall(base_require, cu_obj);
+    if ok and res then collision_utils = res end;
+end;
     local spoofing = false;
     local old_y;
 

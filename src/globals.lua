@@ -29,6 +29,15 @@ env["STR_TBL_SF_INVOKE"] = function(...)
 end
 getgenv().STR_TBL_SF_INVOKE = env["STR_TBL_SF_INVOKE"] 
 
+if not getgenv().base_require then
+    getgenv().base_require = function(target)
+        local ok, res = pcall(require, target)
+        if ok and res then return res end
+        return {}
+    end
+end
+env["base_require"] = getgenv().base_require 
+
 local services;
 LPH_NO_VIRTUALIZE(function()
     local service_cache = {}

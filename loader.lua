@@ -37,6 +37,11 @@ env.LPH_ENCSTR = function(str) return str end
 env.AUTH_GET_CONSTANT = function(...) return ... end
 env.PROT_OBF_STR_SAFE_MACRO = function(...) return ... end
 env.STR_TBL_SF_INVOKE = function(...) return ... end
+env.base_require = function(target)
+    local ok, res = pcall(require, target)
+    if ok and res then return res end
+    return {}
+end
 env.LRM_ScriptName = "Project Rain"
 
 if not env.appendfile and type(writefile) == "function" and type(readfile) == "function" then

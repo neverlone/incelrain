@@ -1,5 +1,10 @@
 local Signal = require("@src/utility/signal");
-local Keybinds = base_require(game:GetService("ReplicatedStorage"):WaitForChild("KeyBinds"));
+local kb_obj = game:GetService("ReplicatedStorage"):WaitForChild("KeyBinds", 3);
+local Keybinds = { IsActionHeld = function() return false end };
+if kb_obj and typeof(base_require) == "function" then
+    local ok, res = pcall(base_require, kb_obj);
+    if ok and res then Keybinds = res end;
+end;
 
 local DefendActionManager = {} do
     DefendActionManager.actions_to_play_through = {};

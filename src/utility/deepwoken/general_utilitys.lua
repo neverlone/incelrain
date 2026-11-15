@@ -1,7 +1,17 @@
 
 
 local general = {}; 
-local collision_utils = base_require(game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("CollisionUtils"));
+local rep = game:GetService("ReplicatedStorage");
+local modules = rep:WaitForChild("Modules", 3);
+local cu_obj = modules and modules:WaitForChild("CollisionUtils", 3);
+local collision_utils = {
+    Raycast = function() return nil end,
+    solidParams = RaycastParams.new()
+};
+if cu_obj and typeof(base_require) == "function" then
+    local ok, res = pcall(base_require, cu_obj);
+    if ok and res then collision_utils = res end;
+end;
 general.collision_utils = collision_utils;
 
 function general:in_air()
@@ -289,7 +299,14 @@ end;
     return false
 end;
 
-local Keybinds = base_require(game:GetService("ReplicatedStorage"):WaitForChild("KeyBinds"..""));
+local kb_inst = rep:WaitForChild("KeyBinds", 3);
+local Keybinds = {
+    IsActionHeld = function(action) return false end
+};
+if kb_inst and typeof(base_require) == "function" then
+    local ok, res = pcall(base_require, kb_inst);
+    if ok and res then Keybinds = res end;
+end;
 function general:generic_parry_ap_task(entity: Model)
     if aztup_options.filters.Value["Dont Parry If Holding Block"] and Keybinds.IsActionHeld("Block") then
         return pcall(function()

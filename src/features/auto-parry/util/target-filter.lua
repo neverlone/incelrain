@@ -37,8 +37,12 @@ function TargetFilter.is_allowed(entity: Instance?, allowed_targets): boolean
 					and local_player.character
 					and (function()
 						if not reputation_system then
-							local modules = services.ReplicatedStorage:WaitForChild("Modules");
-							reputation_system = base_require(modules:WaitForChild("ReputationSystem"));
+							local modules = services.ReplicatedStorage:WaitForChild("Modules", 3);
+							local rep_sys = modules and modules:WaitForChild("ReputationSystem", 3);
+							if rep_sys and typeof(base_require) == "function" then
+								local ok, res = pcall(base_require, rep_sys);
+								if ok and res then reputation_system = res end;
+							end;
 						end
 
 						return reputation_system

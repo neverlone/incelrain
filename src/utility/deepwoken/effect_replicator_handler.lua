@@ -31,11 +31,18 @@ end;
 function EffectReplicatorHandler:connect()
     self.maid:do_cleaning();
 
-    local RawEffectReplicator = game:GetService("ReplicatedStorage"):WaitForChild("EffectReplicator");
-    if not table.find(getloadedmodules(), RawEffectReplicator) then
-        repeat task.wait(0.06) warn("getloadedmodules might be failing!") until table.find(getloadedmodules(), RawEffectReplicator);
+    local RawEffectReplicator = game:GetService("ReplicatedStorage"):WaitForChild("EffectReplicator", 3);
+    if not RawEffectReplicator then return end;
+    if typeof(getloadedmodules) == "function" and not table.find(getloadedmodules(), RawEffectReplicator) then
+        local wait_attempts = 0;
+        repeat 
+            task.wait(0.06);
+            wait_attempts += 1;
+            if wait_attempts > 20 then break end;
+        until table.find(getloadedmodules(), RawEffectReplicator);
     end;
-    local EffectReplicator = base_require(game:GetService("ReplicatedStorage"):WaitForChild("EffectReplicator"));
+    local ok_er, EffectReplicator = pcall(base_require, RawEffectReplicator);
+    if not ok_er or not EffectReplicator then return end;
     getgenv().EffectReplicator = EffectReplicator;
 
     self.maid:give_task(EffectReplicator.EffectAdded:Connect(function(effect)
