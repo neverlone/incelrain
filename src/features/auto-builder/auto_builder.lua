@@ -1,5 +1,16 @@
 
-local data_replication = require(services.ReplicatedStorage.Info.DataReplication);
+-- Safely load DataReplication, fallback to stub if not present (e.g., non‑Deepwoken place)
+local data_replication
+do
+    local info = services.ReplicatedStorage:FindFirstChild("Info", 5)
+    local dr = info and info:FindFirstChild("DataReplication", 5)
+    if dr then
+        local ok, mod = pcall(require, dr)
+        data_replication = (ok and mod) or {}
+    else
+        data_replication = {}
+    end
+end
 
 local builder = {
     loaded_url = nil,
