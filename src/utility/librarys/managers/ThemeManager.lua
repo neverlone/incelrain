@@ -109,7 +109,7 @@ local ThemeManager = {} do
 		 	theme = self.DefaultTheme
 		end
 
-		if isDefault then
+		if isDefault and rawget(getgenv(), "aztup_options") and aztup_options.ThemeManager_ThemeList then
 			aztup_options.ThemeManager_ThemeList:SetValue(theme)
 		else
 			self:ApplyTheme(theme)

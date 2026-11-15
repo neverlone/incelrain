@@ -76,7 +76,8 @@ local function read_source_file(rel_path)
 
     -- 2. Try remote HttpGet
     if CONFIG.REMOTE_URL and CONFIG.REMOTE_URL ~= "" then
-        local remote_url = CONFIG.REMOTE_URL .. rel_path
+        local url_path = rel_path:gsub(" ", "%%20")
+        local remote_url = CONFIG.REMOTE_URL .. url_path
         local success, content = pcall(game.HttpGet, game, remote_url)
         if success and content and not content:find("404: Not Found") then
             return content
@@ -149,13 +150,11 @@ env.inline_asset_b96 = function(asset_path)
     asset_path = asset_path:gsub("^@assets/", "assets/")
     local raw = read_source_file(asset_path)
     if not raw then
-        -- Return empty zstd-compatible base64 payload if not found
         warn_log("Asset not found:", asset_path)
-        return ""
+        raw = ""
     end
 
-    -- If the executor has EncodingService / Base64 encode
-    local enc = game:GetService("HttpService")
+    -- Compress and encode as expected by decode_asset
     local success, compressed = pcall(function()
         local buf = buffer.fromstring(raw)
         local comp = game:GetService("EncodingService"):CompressBuffer(buf, Enum.CompressionAlgorithm.Zstd)

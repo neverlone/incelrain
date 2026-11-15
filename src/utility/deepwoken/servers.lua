@@ -1,9 +1,18 @@
 local servers = {};
 
 local function decode_asset(asset)
-    local decoded = services.EncodingService:Base64Decode(buffer.fromstring(asset));
-    local decompress = services.EncodingService:DecompressBuffer(decoded, Enum.CompressionAlgorithm.Zstd);
-    return buffer.tostring(decompress)
+    if not asset or asset == "" then
+        return "-- Hopper stub\nlocal slot = '%s'\nlocal small = %s\nlocal do_sound = %s\nlocal bypass = %s\n"
+    end;
+    local ok, res = pcall(function()
+        local decoded = services.EncodingService:Base64Decode(buffer.fromstring(asset));
+        local decompress = services.EncodingService:DecompressBuffer(decoded, Enum.CompressionAlgorithm.Zstd);
+        return buffer.tostring(decompress)
+    end);
+    if ok and res then
+        return res;
+    end;
+    return "-- Hopper stub\nlocal slot = '%s'\nlocal small = %s\nlocal do_sound = %s\nlocal bypass = %s\n"
 end;
 
 local hop_script = decode_asset(inline_asset_b96("@assets/hopper.lua"));
