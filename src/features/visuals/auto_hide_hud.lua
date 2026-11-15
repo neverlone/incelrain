@@ -3,7 +3,7 @@
 local connections = {};
 local function enable()
     local function added_callback(object)
-        if object.Name == "RightFrame" and object.Parent.Name == "BackpackGui" then
+        if object and object.Name == "RightFrame" and object.Parent and object.Parent.Name == "BackpackGui" then
             local visible_callback = function()
                 Library.KeybindFrame.Visible = not object.Visible and aztup_toggles.KeybindShower.Value;
                 Library:SetWatermarkVisibility(not object.Visible and aztup_toggles.Watermark.Value)
@@ -36,11 +36,14 @@ local function enable()
         end;
     end;
 
-    for _, object in local_player.instance.PlayerGui:GetDescendants() do
+    local player_gui = local_player and local_player.instance and local_player.instance:FindFirstChild("PlayerGui");
+    if not player_gui then return end;
+
+    for _, object in player_gui:GetDescendants() do
         task.spawn(added_callback, object);
     end;
 
-    connections[1] = local_player.instance.PlayerGui.DescendantAdded:Connect(added_callback);
+    connections[1] = player_gui.DescendantAdded:Connect(added_callback);
     aztup.maid:give_task(connections[1]);
 end;
 

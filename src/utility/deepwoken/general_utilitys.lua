@@ -267,7 +267,7 @@ end;
 
 function general:is_ap_anim(id)
     local data;
-    for _, timing in timings do
+    for _, timing in (timings or {}) do
         if timing.ids and table.find(timing.ids, tostring(id:match("%d+"))) then
             data = timing;
         end;
@@ -285,7 +285,7 @@ end;
         end
 
         local data;
-        for _, timing in timings do
+        for _, timing in (timings or {}) do
             if timing.ids and table.find(timing.ids, tostring(track.Animation.AnimationId:match("%d+"))) then
                 data = timing;
             end;
@@ -299,14 +299,24 @@ end;
     return false
 end;
 
-local kb_inst = rep:FindFirstChild("KeyBinds") or rep:WaitForChild("KeyBinds", 0.5);
-local Keybinds = {
-    IsActionHeld = function(action) return false end
-};
-if kb_inst and typeof(base_require) == "function" then
-    local ok, res = pcall(base_require, kb_inst);
-    if ok and res then Keybinds = res end;
+local _real_kb = nil;
+local function get_kb()
+    if _real_kb then return _real_kb end;
+    local kb_inst = rep:FindFirstChild("KeyBinds");
+    if kb_inst and typeof(base_require) == "function" then
+        local ok, res = pcall(base_require, kb_inst);
+        if ok and typeof(res) == "table" and res.IsActionHeld then
+            _real_kb = res;
+            return _real_kb;
+        end;
+    end;
+    return nil;
 end;
+local Keybinds = {
+    IsActionHeld = function(...) local kb = get_kb(); return (kb and kb.IsActionHeld) and kb.IsActionHeld(...) or false end,
+    ForceActionDown = function(...) local kb = get_kb(); if kb and kb.ForceActionDown then kb.ForceActionDown(...) end end,
+    ForceActionUp = function(...) local kb = get_kb(); if kb and kb.ForceActionUp then kb.ForceActionUp(...) end end,
+};
 function general:generic_parry_ap_task(entity: Model)
     if aztup_options.filters.Value["Dont Parry If Holding Block"] and Keybinds.IsActionHeld("Block") then
         return pcall(function()

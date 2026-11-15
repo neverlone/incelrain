@@ -1,6 +1,6 @@
--- Main menu stub for Project Rain OSS
+-- Main menu stub for Incel Rain
 return {
     initialize = function()
-        print("[Project Rain] Main menu loaded.")
+        print("[Incel Rain] Main menu loaded.")
     end
 }

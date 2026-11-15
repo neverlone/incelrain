@@ -1,14 +1,17 @@
--- Rebuilt features loader for Project Rain OSS
+-- Rebuilt features loader for Incel Rain
 local loader = {}
 
 function loader.initialize()
     getgenv().Feature = require("@src/features/generic_feature")
 
     local feature_modules = {
-        -- Auto Fight & Auto Loot
+        -- Auto Fight, Auto Loot & Auto Parry
         "@src/features/auto-fight/auto-fight",
         "@src/features/auto-loot/auto-loot",
+        "@src/features/auto-parry/auto-parry",
         "@src/features/auto-parry/hitbox_simulator",
+        "@src/features/auto-parry/handlers/effect-handler",
+        "@src/features/auto-parry/handlers/part-handler",
 
         -- Automation
         "@src/features/automation/auto_brutus",
@@ -71,6 +74,9 @@ function loader.initialize()
         "@src/features/misc/apply_fflags",
         "@src/features/misc/build_stealer",
         "@src/features/misc/hair_id_stealer",
+        "@src/features/misc/linoria_watermark",
+        "@src/features/misc/opiumware_fix",
+        "@src/features/misc/override_deepwoken_cursor",
         "@src/features/misc/override_roblox_reset",
         "@src/features/misc/proximity_list",
         "@src/features/misc/streamer_mode",
@@ -87,6 +93,7 @@ function loader.initialize()
         "@src/features/qol/fake_void",
         "@src/features/qol/fall_multiplier",
         "@src/features/qol/fast_mode",
+        "@src/features/qol/fps_booster",
         "@src/features/qol/girl_detector",
         "@src/features/qol/give_animation_gamepass",
         "@src/features/qol/jesus",
@@ -135,6 +142,7 @@ function loader.initialize()
         "@src/features/spoofing/momentum_spoof",
 
         -- Visuals
+        "@src/features/visuals/auto_hide_hud",
         "@src/features/visuals/chain_counter",
         "@src/features/visuals/free_cam",
         "@src/features/visuals/full_bright",
@@ -153,7 +161,7 @@ function loader.initialize()
         local success, feat = xpcall(function()
             return require(path)
         end, function(err)
-            warn(string.format("[Project Rain] Failed to initialize feature '%s': %s", tostring(path), tostring(err)))
+            warn(string.format("[Incel Rain] Failed to initialize feature '%s': %s", tostring(path), tostring(err)))
         end)
 
         if success and typeof(feat) == "table" and feat.id then

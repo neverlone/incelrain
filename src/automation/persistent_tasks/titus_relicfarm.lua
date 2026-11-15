@@ -495,7 +495,7 @@ struct = automation_struct:construct({
                                                         }
                                                     }
                                                 },
-                                                username = "Project Rain",
+                                                username = "Incel Rain",
                                                 avatar_url = "https://cdn.discordapp.com/attachments/1211502078200127529/1464075011550613588/PRLOGO.png",
                                                 attachments = {},
                                                 flags = 4096

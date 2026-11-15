@@ -176,7 +176,7 @@ local success, result = pcall(function()
 end);
 
 if not success or not result then 
-    return game:GetService("Players").LocalPlayer:Kick("[pr] failed to hook, kicking to prevent bans\n" .. result)
+    return game:GetService("Players").LocalPlayer:Kick("[ir] failed to hook, kicking to prevent bans\n" .. result)
 end; 
 
 do 
@@ -299,17 +299,19 @@ env.Tween = require(("@src/utility/deepwoken/safe_tween"));
 env.EffectReplicatorHandler = require(("@src/utility/deepwoken/effect_replicator_handler"));
 env.LoopUtil = require(("@src/utility/loop"));
 env.scheduler = require("@src/utility/scheduler");
+env.Latency = require("@src/utility/latency");
 env.TargetFilter = require("@src/features/auto-parry/util/target-filter")
 env.ab_builder = require("@src/features/auto-builder/auto_builder");
 aztup.automation.initialize();
 
 require(("@src/features/auto-parry/block-input-manager"))
+env.DefendActionManager = require("@src/features/auto-parry/defend-action-manager");
+chance_store = require("@src/features/auto-parry/data/chance_store")
+getgenv().chance_store = chance_store;
 require(("@src/features/loader")).initialize();
 task.spawn(pcall, function() 
     require(LPH_ENCSTR("@src/features/auto-parry/handlers/animator-handler"));
 end)
-chance_store = require("@src/features/auto-parry/data/chance_store")
-getgenv().chance_store = chance_store;
 require(LPH_ENCSTR("@src/ui/ui")).initialize();
 
 task.spawn(pcall, require("@src/features/visuals/player_esp"));
@@ -317,7 +319,7 @@ task.spawn(pcall, require("@src/features/visuals/base_esp"));
 
 if not fflags:get("dont_notify_on_first_exec") and aztup.silent_mode then
     if not persistent_data:get("has_executed_before") then
-        messagebox("You have 'Silent Mode' enabled, Which means you wont see the UI until you open it with the keybind & have extra anti PC check features, If you would like to disable this, Go to UI settings and disable it, This notification is disablable in the fast flags area of UI", "Project Rain", 0)
+        messagebox("You have 'Silent Mode' enabled, Which means you wont see the UI until you open it with the keybind & have extra anti PC check features, If you would like to disable this, Go to UI settings and disable it, This notification is disablable in the fast flags area of UI", "Incel Rain", 0)
     end;
     
     persistent_data:set("has_executed_before", true); 

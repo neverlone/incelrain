@@ -1,5 +1,5 @@
 --[[
-    Project Rain OSS - Universal Loader
+    Incel Rain - Universal Loader
     Supports both local executor execution (workspace directory) and remote HTTP loading.
 --]]
 
@@ -17,12 +17,12 @@ local CONFIG = {
 
 local function log(...)
     if CONFIG.DEBUG then
-        print("[Project Rain Loader]", ...)
+        print("[Incel Rain Loader]", ...)
     end
 end
 
 local function warn_log(...)
-    warn("[Project Rain Loader]", ...)
+    warn("[Incel Rain Loader]", ...)
 end
 
 -- ============================================================================
@@ -209,17 +209,17 @@ local function rain_require(target)
 
     local code = read_source_file(rel_path)
     if not code then
-        error(string.format("[Project Rain] Failed to resolve module path '%s' (resolved to: '%s')", tostring(target), rel_path))
+        error(string.format("[Incel Rain] Failed to resolve module path '%s' (resolved to: '%s')", tostring(target), rel_path))
     end
 
     local chunk, syntax_err = loadstring(code, "@" .. rel_path)
     if not chunk then
-        error(string.format("[Project Rain] Syntax error in module '%s': %s", rel_path, tostring(syntax_err)))
+        error(string.format("[Incel Rain] Syntax error in module '%s': %s", rel_path, tostring(syntax_err)))
     end
 
     local packed = table.pack(pcall(chunk))
     if not packed[1] then
-        error(string.format("[Project Rain] Runtime error executing module '%s': %s", rel_path, tostring(packed[2])))
+        error(string.format("[Incel Rain] Runtime error executing module '%s': %s", rel_path, tostring(packed[2])))
     end
 
     local results = table.pack(table.unpack(packed, 2, packed.n))
@@ -232,7 +232,7 @@ getgenv().require = rain_require
 -- ============================================================================
 -- 5. Execution Entry Point
 -- ============================================================================
-log("Initializing Project Rain environment...")
+log("Initializing Incel Rain environment...")
 
 local ok_globals, err_globals = pcall(function()
     return require("@src/globals")
@@ -251,5 +251,5 @@ end)
 if not ok_init then
     warn_log("Failed to load init script:", err_init)
 else
-    log("Project Rain initialized successfully!")
+    log("Incel Rain initialized successfully!")
 end

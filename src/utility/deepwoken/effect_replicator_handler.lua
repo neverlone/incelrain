@@ -10,6 +10,13 @@ end;
 
 
 local Maid = require("@src/utility/maid");
+getgenv().EffectReplicator = getgenv().EffectReplicator or {
+    FindEffect = function() return nil end,
+    HasEffect = function() return false end,
+    HasAny = function() return false end,
+    CreateEffect = function() return nil end,
+    Effects = {}
+};
 local EffectReplicatorHandler = {};
 EffectReplicatorHandler.__index = EffectReplicatorHandler;
 EffectReplicatorHandler.hooks = {};
