@@ -5,15 +5,28 @@ local STR_TBL_SF_INVOKE = rawget(getfenv(), "STR_TBL_SF_INVOKE") or getgenv().ST
 
 if game.PlaceId == 4111023553 then return true end
 
+local is_deepwoken = place_name ~= nil or (services and services.ReplicatedStorage and services.ReplicatedStorage:FindFirstChild("Requests") ~= nil)
+
+if not is_deepwoken then
+    Logger.log_for_devs("Non-Deepwoken environment detected; skipping game-specific hooks.");
+    getgenv().KeyHandler = {
+        get_key = function(self, remote) return remote end,
+        get_cache = function(self, remote) return remote end,
+    };
+    return true;
+end;
+
 Logger.log_for_devs("beginning anticheat bypass...");
 
 task.spawn(pcall, function()
-    
+    local player_scripts = game:GetService("Players").LocalPlayer:WaitForChild("PlayerScripts", 5)
+    local client_actor = player_scripts and player_scripts:WaitForChild("ClientActor", 5)
+    local client_manager = client_actor and client_actor:WaitForChild("ClientManager", 5)
 
-    local client_manager = game:GetService("Players").LocalPlayer:WaitForChild("PlayerScripts"):WaitForChild("ClientActor"):WaitForChild("ClientManager")
-
-    client_manager.Enabled = false;
-    Logger.log_for_devs("disabled client manager/error check (1)");
+    if client_manager then
+        client_manager.Enabled = false;
+        Logger.log_for_devs("disabled client manager/error check (1)");
+    end
 end);
 local pi = (function() 
     return 0.125 + tonumber(STR_TBL_SF_INVOKE("3"))
@@ -75,16 +88,29 @@ end
 
             if self[STR_TBL_SF_INVOKE("remotes")] and self[STR_TBL_SF_INVOKE("enc_f")] then
                 break            
-end
+            end
 
             attempts += 1;
+            if attempts > 30 then
+                Logger.log_for_devs("[kh] timed out searching for remotes/enc_f in GC");
+                break;
+            end;
             task.wait(attempts / 20);
         until self[STR_TBL_SF_INVOKE("remotes")] and self[STR_TBL_SF_INVOKE("enc_f")];
+
+        if not (self[STR_TBL_SF_INVOKE("remotes")] and self[STR_TBL_SF_INVOKE("enc_f")]) then
+            return
+        end;
+
         if shared.b then return Logger.log_for_devs("[kh] already bypassed this session")end
         Logger.log_for_devs("[kh] grabbed remotes & enc_f");
 
-        
-        local key_handler_module = require(services.ReplicatedStorage:WaitForChild(STR_TBL_SF_INVOKE("Modules")):WaitForChild(STR_TBL_SF_INVOKE("ClientManager")):WaitForChild(STR_TBL_SF_INVOKE("KeyHandler")));
+        local modules = services.ReplicatedStorage:WaitForChild(STR_TBL_SF_INVOKE("Modules"), 5);
+        local client_mgr = modules and modules:WaitForChild(STR_TBL_SF_INVOKE("ClientManager"), 5);
+        local key_handler_inst = client_mgr and client_mgr:WaitForChild(STR_TBL_SF_INVOKE("KeyHandler"), 5);
+        if not key_handler_inst then return end;
+        local success_kh, key_handler_module = pcall(require, key_handler_inst);
+        if not success_kh or not key_handler_module then return end;
         local generate_guid = game:GetService("HttpService").GenerateGUID;
 
         local L_231 = function()
@@ -189,7 +215,11 @@ end or hookmetamethod;
 getgenv().KeyHandler = KeyHandlerClass.new();
 
 
-local requests = services.ReplicatedStorage:WaitForChild("Requests")
+local requests = services.ReplicatedStorage:WaitForChild("Requests", 5)
+if not requests then
+    Logger.log_for_devs("[hooking] Requests folder not found in ReplicatedStorage, skipping remote hooks");
+    return true
+end
 local ban_remotes = 0
 local bans = {};
 
@@ -229,11 +259,11 @@ end
 
 
 
-if not requests:FindFirstChild("ReportGoogleAnalyticsEvent") then
-    return local_player.instance:Kick("Failed to get BanRemote[3]")
+if requests:FindFirstChild("ReportGoogleAnalyticsEvent") then
+    bans[requests.ReportGoogleAnalyticsEvent] = true;
+else
+    Logger.log_for_devs("[hooking] ReportGoogleAnalyticsEvent not found");
 end;
-
-bans[requests.ReportGoogleAnalyticsEvent] = true;
 
 Logger.log_for_devs("[hooking] hooking remote_event.fire_server");
 local old_fireserver;
@@ -247,9 +277,14 @@ end
 end));
 
 local animations = {} do
-    for _, v in next, services.ReplicatedStorage:WaitForChild(STR_TBL_SF_INVOKE("Assets")):WaitForChild(STR_TBL_SF_INVOKE("Anims")):WaitForChild(STR_TBL_SF_INVOKE("Gestures")):GetChildren() do
-        if v:FindFirstChild(STR_TBL_SF_INVOKE("Pack1")) or v:FindFirstChild(STR_TBL_SF_INVOKE("Pack2")) or v:FindFirstChild(STR_TBL_SF_INVOKE("MetalPromo")) then
-            animations[v.Name] = v
+    local assets = services.ReplicatedStorage:WaitForChild(STR_TBL_SF_INVOKE("Assets"), 5);
+    local anims = assets and assets:WaitForChild(STR_TBL_SF_INVOKE("Anims"), 5);
+    local gestures = anims and anims:WaitForChild(STR_TBL_SF_INVOKE("Gestures"), 5);
+    if gestures then
+        for _, v in next, gestures:GetChildren() do
+            if v:FindFirstChild(STR_TBL_SF_INVOKE("Pack1")) or v:FindFirstChild(STR_TBL_SF_INVOKE("Pack2")) or v:FindFirstChild(STR_TBL_SF_INVOKE("MetalPromo")) then
+                animations[v.Name] = v
+            end
         end
     end
 end
@@ -514,10 +549,21 @@ env.unhooked_namecall = old_namecall;
 task.spawn(function() 
     Logger.log_for_devs("[hooking] hooking camera popper");
 
-    local old_popper;
-    old_popper = hookfunction(require(services.StarterPlayer:WaitForChild("PlayerModule"):WaitForChild("CameraModule"):WaitForChild("ZoomController"):WaitForChild("Popper")), function(...) 
-        return (aztup and (aztup.flags.noclip or aztup.flags.noclip_camera)) and math.huge or old_popper(...)    
-end);
+    local starter_player = services.StarterPlayer or game:GetService("StarterPlayer");
+    local player_module = starter_player and (starter_player:FindFirstChild("PlayerModule") or starter_player:WaitForChild("PlayerModule", 5));
+    local camera_module = player_module and (player_module:FindFirstChild("CameraModule") or player_module:WaitForChild("CameraModule", 5));
+    local zoom_ctrl = camera_module and (camera_module:FindFirstChild("ZoomController") or camera_module:WaitForChild("ZoomController", 5));
+    local popper = zoom_ctrl and (zoom_ctrl:FindFirstChild("Popper") or zoom_ctrl:WaitForChild("Popper", 5));
+
+    if popper then
+        local success, popper_mod = pcall(require, popper);
+        if success and popper_mod then
+            local old_popper;
+            old_popper = hookfunction(popper_mod, function(...) 
+                return (aztup and (aztup.flags.noclip or aztup.flags.noclip_camera)) and math.huge or old_popper(...)    
+            end);
+        end;
+    end;
 end);
 
 Logger.log_for_devs("[hooking] finished...");

@@ -157,13 +157,18 @@ if fflags:get("auto_load") and script_key then
 end
 
 if aztup.automation:should_auto_start() then
-    local requests = services.ReplicatedStorage:WaitForChild("Requests");
-    local start = requests:WaitForChild("StartMenu"):WaitForChild("Start")
-    repeat
-        start:FireServer()
-        task.wait(0.5)
-    until game:GetService("Players").LocalPlayer.Character;
-    task.wait(1);
+    local requests = services.ReplicatedStorage:WaitForChild("Requests", 5);
+    if requests then
+        local start_menu = requests:WaitForChild("StartMenu", 5);
+        local start = start_menu and start_menu:WaitForChild("Start", 5);
+        if start then
+            repeat
+                start:FireServer()
+                task.wait(0.5)
+            until game:GetService("Players").LocalPlayer.Character;
+            task.wait(1);
+        end;
+    end;
 end;
 
 local success, result = pcall(function()
