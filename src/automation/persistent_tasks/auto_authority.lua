@@ -208,7 +208,7 @@ struct = automation_struct:construct({
                                     end;
                                 end;
                             until current_banner;
-                            while task.wait() do
+                            repeat
                                 Tween.new(current_banner:GetPivot() * CFrame.new(0, 8, 0), true, 225).wait();
                                 local start = tick();
                                 local stop = false;
