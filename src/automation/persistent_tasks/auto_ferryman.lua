@@ -629,7 +629,7 @@ function autoferryman:refill()
                         ["Umbral Obsidian"] = true
                     }
                 }
-                game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("Craft"):InvokeServer(unpack(args))
+                game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("Craft",5):InvokeServer(unpack(args))
             end)
             task.wait(1)
         elseif has_iron and has_coal then
@@ -640,7 +640,7 @@ function autoferryman:refill()
                         Iron = true
                     }
                 }
-                game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("Craft"):InvokeServer(unpack(args))
+                game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("Craft",5):InvokeServer(unpack(args))
             end)
             task.wait(1)
         elseif has_rock and has_coal then
@@ -651,7 +651,7 @@ function autoferryman:refill()
                         Rock = true
                     }
                 }
-                game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("Craft"):InvokeServer(unpack(args))
+                game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("Craft",5):InvokeServer(unpack(args))
             end)
             task.wait(1)
         else
@@ -706,7 +706,7 @@ function autoferryman:refill()
                                     Rock = true
                                 }
                             }
-                            game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("Craft"):InvokeServer(unpack(args))
+                            game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("Craft",5):InvokeServer(unpack(args))
                         end)
                     end)
                     --task.wait(1)
@@ -719,7 +719,7 @@ function autoferryman:refill()
                                     ['Umbral Obsidian'] = true
                                 }
                             }
-                            game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("Craft"):InvokeServer(unpack(args))
+                            game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("Craft",5):InvokeServer(unpack(args))
                         end)
                     end)
                     --task.wait(1)
@@ -775,7 +775,7 @@ function autoferryman:refill()
                             Stick = true
                         }
                     }
-                    game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("Craft"):InvokeServer(unpack(args))
+                    game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("Craft",5):InvokeServer(unpack(args))
                 end)
                 local start = tick();
                 repeat task.wait() until get_choice_prompt() or tick() - start > 4;
@@ -793,7 +793,7 @@ function autoferryman:refill()
                             Wood = true
                         }
                     }
-                    game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("Craft"):InvokeServer(unpack(args))
+                    game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("Craft",5):InvokeServer(unpack(args))
                 end)
                 local start = tick();
                 repeat task.wait() until get_choice_prompt() or tick() - start > 4;
@@ -820,7 +820,7 @@ function autoferryman:refill()
         --                    Wood = true
         --                }
         --            }
-        --            game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("Craft"):InvokeServer(unpack(args))
+        --            game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("Craft",5):InvokeServer(unpack(args))
         --        end)
         --                        local start = tick();
 --
@@ -1163,7 +1163,7 @@ function autoferryman:kill_ferryman()
                 choice = "Who are you?"
             }
         }
-        game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args))
+        game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
         
         task.wait(0.5)
         
@@ -1172,7 +1172,7 @@ function autoferryman:kill_ferryman()
                 choice = "[Tell him your name]"
             }
         }
-        game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args))
+        game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
         
         task.wait(0.5)
         
@@ -1181,7 +1181,7 @@ function autoferryman:kill_ferryman()
                 choice = "A wager?"
             }
         }
-        game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args))
+        game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
         
         task.wait(0.5)
         
@@ -1190,7 +1190,7 @@ function autoferryman:kill_ferryman()
                 choice = "Deal."
             }
         }
-        game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args))
+        game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
         
     end)
     
@@ -1360,7 +1360,7 @@ function autoferryman:kill_ferryman()
             choice = "Who are you?"
         }
     }
-    game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args))
+    game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
     
     task.wait(0.5)
     
@@ -1369,7 +1369,7 @@ function autoferryman:kill_ferryman()
             exit = true
         }
     }
-    game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args))
+    game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
     
     task.wait(0.5)
 

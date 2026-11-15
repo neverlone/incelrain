@@ -99,16 +99,16 @@ end);
 
 automation_struct.create_character = function(self)
     local options = self.character_creator_handler_opts
-	local requests = services.ReplicatedStorage:WaitForChild("Requests")
-	local characterCreator = requests:WaitForChild("CharacterCreator")
-	local pickSpawn = characterCreator:WaitForChild("PickSpawn")
-	local changeWeapon = characterCreator:WaitForChild("ChangeWeapon")
-	local finishCreation = characterCreator:WaitForChild("FinishCreation")
+	local requests = services.ReplicatedStorage:WaitForChild("Requests",5)
+	local characterCreator = requests:WaitForChild("CharacterCreator",5)
+	local pickSpawn = characterCreator:WaitForChild("PickSpawn",5)
+	local changeWeapon = characterCreator:WaitForChild("ChangeWeapon",5)
+	local finishCreation = characterCreator:WaitForChild("FinishCreation",5)
 	local toggleMetaModifier = requests:WaitForChild("ToggleMetaModifier", 20)
-	local playerGui = local_player.instance:WaitForChild("PlayerGui")
-	local characterGui = playerGui:WaitForChild("CharacterCreator")
-	local gameMode = characterGui:WaitForChild("GameMode"):WaitForChild("Options")
-	local standard = gameMode:WaitForChild("Standard"):WaitForChild("Element")
+	local playerGui = local_player.instance:WaitForChild("PlayerGui",5)
+	local characterGui = playerGui:WaitForChild("CharacterCreator",5)
+	local gameMode = characterGui:WaitForChild("GameMode",5):WaitForChild("Options",5)
+	local standard = gameMode:WaitForChild("Standard",5):WaitForChild("Element",5)
 	local suc;
 
 	pcall(function()
@@ -153,9 +153,9 @@ automation_struct.create_character = function(self)
         end
     end
 
-	local pickBoon = characterCreator:WaitForChild("PickBoon")
-	local pickFlaw = characterCreator:WaitForChild("PickFlaw")
-	local dataReplication = require(game:GetService("ReplicatedStorage"):WaitForChild("Info"):WaitForChild("DataReplication")).GetData()
+	local pickBoon = characterCreator:WaitForChild("PickBoon",5)
+	local pickFlaw = characterCreator:WaitForChild("PickFlaw",5)
+	local dataReplication = require(game:GetService("ReplicatedStorage"):WaitForChild("Info",5):WaitForChild("DataReplication",5)).GetData()
 
 	for _, flaw in next, dataReplication.Flaws do
 		pickFlaw:InvokeServer(tostring(flaw))
@@ -174,7 +174,7 @@ automation_struct.create_character = function(self)
 	end) 
     
     task.spawn(function()
-	    local choicePrompt = playerGui:WaitForChild("ChoicePrompt")
+	    local choicePrompt = playerGui:WaitForChild("ChoicePrompt",5)
 	    local choice = choicePrompt:WaitForChild("Choice", 30)
 
 		if not choice then return; end
@@ -190,8 +190,8 @@ automation_struct.create_character = function(self)
         end
     end
 
-    local_player.character:WaitForChild("HumanoidRootPart")
-    local_player.character:WaitForChild("Humanoid")
+    local_player.character:WaitForChild("HumanoidRootPart",5)
+    local_player.character:WaitForChild("Humanoid",5)
 end
  
 return automation_struct; 

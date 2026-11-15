@@ -215,7 +215,7 @@ function autotitus:attachToTitus()
         task.wait() 
     until titus or not aztup.automation:has_any();
     if not titus then return end
-    local torso = titus:WaitForChild("Torso")
+    local torso = titus:WaitForChild("Torso",5)
     if not torso then return end
 
     local playerRoot = local_player.root_part;
@@ -302,7 +302,7 @@ function autotitus:runDungeon()
     end)
 
     local finished = false;
-    local conn = workspace:WaitForChild("DetainmentCore").ChildAdded:Connect(function(child)
+    local conn = workspace:WaitForChild("DetainmentCore",5).ChildAdded:Connect(function(child)
         if child.Name == "DungeonExitFinal" then
             finished = true; 
         end
@@ -455,13 +455,13 @@ struct = automation_struct:construct({
                         local args = {
                             slot
                         }
-                        game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("WipeSlot"):InvokeServer(unpack(args))
+                        game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("WipeSlot",5):InvokeServer(unpack(args))
                     
                         task.wait(0.5)
                     ]]
                     queue_on_teleport(string.format(chooseSlot, game.JobId, slot or "A"))
                     
-                    local get_score = services.ReplicatedStorage:WaitForChild("Requests"):WaitForChild("GetScore");
+                    local get_score = services.ReplicatedStorage:WaitForChild("Requests",5):WaitForChild("GetScore",5);
                     get_score.OnClientEvent:Connect(function(v)
                         local last_wiped_at = persistent_data:get("wiped_at", nil);
                         local wiped_at = tick();
@@ -512,8 +512,8 @@ struct = automation_struct:construct({
                     while task.wait() do
                         local_player.root_part.CFrame = tpLocation;
                         
-                        fireproximityprompt(workspace:WaitForChild("NPCs"):WaitForChild("Self"):WaitForChild("InteractPrompt"))
-                        game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer({
+                        fireproximityprompt(workspace:WaitForChild("NPCs",5):WaitForChild("Self",5):WaitForChild("InteractPrompt",5))
+                        game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer({
                             choice = '[The End]',
                         })
                     end;
@@ -535,7 +535,7 @@ struct = automation_struct:construct({
             end,
             
             onenter_bank_relics = function(self)
-                local bkr = workspace.NPCs:WaitForChild("Banker")
+                local bkr = workspace.NPCs:WaitForChild("Banker",5)
                 pcall(function() autotitus.player_safe_tween(autotitus, bkr.HumanoidRootPart.CFrame * CFrame.new(0, -6, 0), 150) end)
                 pcall(function() local_player.root_part.CFrame = bkr.HumanoidRootPart.CFrame * CFrame.new(0, -6, 0) end)
                 local dl = tick()
@@ -562,7 +562,7 @@ struct = automation_struct:construct({
                                     if itm.Name == bkn then dep[#dep + 1] = itm end
                                 end
                                 if #dep == 0 then break end
-                                bg:WaitForChild("Choice"):FireServer("deposit", dep)
+                                bg:WaitForChild("Choice",5):FireServer("deposit", dep)
                                 local bt = tick()
                                 repeat
                                     if autotitus.ful() then
@@ -610,15 +610,15 @@ struct = automation_struct:construct({
                     end
                 
                     if should_bank then
-                        local bankGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("BankGui");
+                        local bankGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui",5):WaitForChild("BankGui",5);
                         local args = {
                         	"deposit",
                         	to_bank
                         }
-                        bankGui:WaitForChild("Choice"):FireServer(unpack(args))
+                        bankGui:WaitForChild("Choice",5):FireServer(unpack(args))
                         task.spawn(function()
                             task.wait(2.5);
-                            game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("ChoicePrompt"):WaitForChild("Choice"):InvokeServer(#to_bank);
+                            game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("ChoicePrompt",5):WaitForChild("Choice",5):InvokeServer(#to_bank);
                         end)
                         task.wait(4);
                         local start_bank = tick();
@@ -653,21 +653,21 @@ struct = automation_struct:construct({
                         end
                     end;
                 end)
-                Tween.new(workspace.NPCs:WaitForChild("Banker"):GetPivot() * CFrame.new(0, -6, 0), true, 150).wait();
+                Tween.new(workspace.NPCs:WaitForChild("Banker",5):GetPivot() * CFrame.new(0, -6, 0), true, 150).wait();
                 
                 local start = tick()
-                while not game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("BankGui") or tick() - start >= 15 do
-                    fireproximityprompt(workspace.NPCs:WaitForChild("Banker").InteractPrompt)
+                while not game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui",5):FindFirstChild("BankGui") or tick() - start >= 15 do
+                    fireproximityprompt(workspace.NPCs:WaitForChild("Banker",5).InteractPrompt)
                     local args = {
                     	{
                     		choice = "Can I access my account?"
                     	}
                     }
-                    game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args))
+                    game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
                     task.wait();
                 end
 
-                if not game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("BankGui") then return; end
+                if not game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui",5):FindFirstChild("BankGui") then return; end
 
                 task.spawn(start_bank);
                 task.delay(90, function()
@@ -680,7 +680,7 @@ struct = automation_struct:construct({
                         autotitus.serverHop();
                         while task.wait() do end
                     end
-                    Tween.new(workspace.NPCs:WaitForChild("Banker"):GetPivot() * CFrame.new(0, -6, 0), true, 150).wait();
+                    Tween.new(workspace.NPCs:WaitForChild("Banker",5):GetPivot() * CFrame.new(0, -6, 0), true, 150).wait();
                     task.wait();
                 end
 

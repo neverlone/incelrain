@@ -67,7 +67,7 @@ local notefarm = {
                 choice = value
             }
         }
-        game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args))
+        game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
     end,
     
     sendDialogue_exit = function(self)
@@ -76,7 +76,7 @@ local notefarm = {
                 exit = true
             }
         }
-        game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args))
+        game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
     end,
     
     click = function(self, btn)
@@ -133,7 +133,7 @@ local notefarm = {
         local bankGui = local_player.instance.PlayerGui:FindFirstChild("BankGui")
         if not bankGui then return false end
         
-        bankGui:WaitForChild("Choice"):FireServer("notes_deposit")
+        bankGui:WaitForChild("Choice",5):FireServer("notes_deposit")
         task.wait(1)
         
         return self:setBankAmountAndConfirm(currentNotes)
@@ -424,12 +424,12 @@ struct = automation_struct:construct({
                         if game.PlaceId ~= 4111023553 then return; end
                         local slot = "%s";
                         queueonteleport('if game.PlaceId == 4111023553 then return; end; xpcall(function() local sound = Instance.new("Sound", game:GetService("CoreGui")); game:GetService("Debris"):AddItem(sound, 6); sound.Volume = 1.3; sound.SoundId = getcustomasset("Project Rain/assets/notification.mp3"); sound:Play(); end, warn);')
-                        game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("WipeSlot"):InvokeServer(slot)
+                        game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("WipeSlot",5):InvokeServer(slot)
                         task.wait(0.5)
                     ]]
                     queue_on_teleport(string.format(chooseSlot, slot or "A"))
                     
-                    local get_score = services.ReplicatedStorage:WaitForChild("Requests"):WaitForChild("GetScore");
+                    local get_score = services.ReplicatedStorage:WaitForChild("Requests",5):WaitForChild("GetScore",5);
                     get_score.OnClientEvent:Connect(function(v)
                         get_score:FireServer();
                     end);
@@ -441,8 +441,8 @@ struct = automation_struct:construct({
                             while task.wait() do end
                         end
                         
-                        fireproximityprompt(workspace:WaitForChild("NPCs"):WaitForChild("Self"):WaitForChild("InteractPrompt"))
-                        game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer({
+                        fireproximityprompt(workspace:WaitForChild("NPCs",5):WaitForChild("Self",5):WaitForChild("InteractPrompt",5))
+                        game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer({
                             choice = '[The End]',
                         })
                     end;

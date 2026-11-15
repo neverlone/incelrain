@@ -86,22 +86,22 @@ end
 			local dotProduct = (char.HumanoidRootPart.Position - local_player.root_part.Position):Dot(local_player.root_part.CFrame.LookVector);
 			if (dotProduct <= 0) then return end; 
             if sprinting then
-                local_player.character:WaitForChild("CharacterHandler"):WaitForChild("Requests").ServerSprint:FireServer(false);
+                local_player.character:WaitForChild("CharacterHandler",5):WaitForChild("Requests",5).ServerSprint:FireServer(false);
                 task.wait(1 / 20);
             end;
 
             local script_crouched = false;
             if not EffectReplicator:FindEffect("Crouching") then
-                local_player.character:WaitForChild("CharacterHandler"):WaitForChild("Requests"):WaitForChild("ServerCrouch"):FireServer(true);
+                local_player.character:WaitForChild("CharacterHandler",5):WaitForChild("Requests",5):WaitForChild("ServerCrouch",5):FireServer(true);
                 script_crouched = true;
             end;
 
             local start = tick();
             repeat task.wait() until EffectReplicator:FindEffect("Crouching") or tick() - start > Latency:get_ping() * 2;
             if tick() - start > Latency:get_ping() * 2 then
-                local_player.character:WaitForChild("CharacterHandler"):WaitForChild("Requests"):WaitForChild("ServerCrouch"):FireServer(false);
+                local_player.character:WaitForChild("CharacterHandler",5):WaitForChild("Requests",5):WaitForChild("ServerCrouch",5):FireServer(false);
                 if sprinting then
-                    local_player.character:WaitForChild("CharacterHandler"):WaitForChild("Requests").ServerSprint:FireServer(true);
+                    local_player.character:WaitForChild("CharacterHandler",5):WaitForChild("Requests",5).ServerSprint:FireServer(true);
                 end;
                 return            
 end;
@@ -125,7 +125,7 @@ end;
             end);
             task.wait(1 / 20);
             if script_crouched then
-                local_player.character:WaitForChild("CharacterHandler"):WaitForChild("Requests"):WaitForChild("ServerCrouch"):FireServer(false);
+                local_player.character:WaitForChild("CharacterHandler",5):WaitForChild("Requests",5):WaitForChild("ServerCrouch",5):FireServer(false);
             else
                 local VIM = Instance.new("VirtualInputManager");
                 VIM:SendKeyEvent(true, Enum.KeyCode.LeftControl, false, game);
@@ -133,7 +133,7 @@ end;
             end;
 
             if sprinting then
-                local_player.character:WaitForChild("CharacterHandler"):WaitForChild("Requests").ServerSprint:FireServer(true);
+                local_player.character:WaitForChild("CharacterHandler",5):WaitForChild("Requests",5).ServerSprint:FireServer(true);
             end;
         end;
     else

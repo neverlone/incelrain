@@ -216,7 +216,7 @@ if thrown then
 		elseif part.Name == "Bullet" and not checkRange(part, 10) then
 			local closest_player
 			local closest_distance = math.huge
-			for _, char in workspace:WaitForChild("Live"):GetChildren() do
+			for _, char in workspace:WaitForChild("Live",5):GetChildren() do
 				if char and char:FindFirstChild("HumanoidRootPart") then
 					local distance = (part.Position - char.HumanoidRootPart.Position).Magnitude
 					if distance < closest_distance then
@@ -243,7 +243,7 @@ if thrown then
 		elseif part.Name == "SeekerOrb" then
 			local closest_player
 			local closest_distance = math.huge
-			for _, char in workspace:WaitForChild("Live"):GetChildren() do
+			for _, char in workspace:WaitForChild("Live",5):GetChildren() do
 				if char and char:FindFirstChild("HumanoidRootPart") then
 					local distance = (part.Position - char.HumanoidRootPart.Position).Magnitude
 					if distance < closest_distance then
@@ -345,7 +345,7 @@ aztup.maid:give_task(workspace.DescendantAdded:Connect(LPH_NO_VIRTUALIZE(functio
 		
 		local closest_player
 		local closest_distance = math.huge
-		for _, char in workspace:WaitForChild("Live"):GetChildren() do
+		for _, char in workspace:WaitForChild("Live",5):GetChildren() do
 			if char and char:FindFirstChild("HumanoidRootPart") then
 				local distance = (projectile.Parent.Position - char.HumanoidRootPart.Position).Magnitude
 				if distance < closest_distance then
@@ -396,7 +396,7 @@ end;
 		end
 
 		local ethiron
-		for _, entity in workspace:WaitForChild("Live"):GetChildren() do
+		for _, entity in workspace:WaitForChild("Live",5):GetChildren() do
 			if entity.Name:match("avatar") then
 				ethiron = entity
 				break
@@ -473,3 +473,4 @@ end;
 end)))
 
 return nil
+

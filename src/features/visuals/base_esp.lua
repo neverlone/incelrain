@@ -842,25 +842,25 @@ end;
 		end)
 	end
 
-	InstanceWatcher.new(workspace:WaitForChild("Thrown"), function(entity)
+	InstanceWatcher.new(workspace:WaitForChild("Thrown",5), function(entity)
 		return entity.Name == "BigArtifact" and #entity:GetChildren() > 0
 	end, function(entity)
 		esp.new(entity, "artifact_esp")
 	end, true)
 	
-	InstanceWatcher.new(workspace:WaitForChild("Thrown"), function(entity)
+	InstanceWatcher.new(workspace:WaitForChild("Thrown",5), function(entity)
 		return entity.Name == "EventFeatherRef"
 	end, function(entity)
 		esp.new(entity, "owl_esp")
 	end, true)
 
-	InstanceWatcher.new(workspace:WaitForChild("Thrown"), function(entity)
+	InstanceWatcher.new(workspace:WaitForChild("Thrown",5), function(entity)
 		return entity.Name == "Chest" or entity:WaitForChild("Lid", 2.5)
 	end, function(entity)
 		esp.new(entity, "chest_esp")
 	end, true)
 
-	InstanceWatcher.new(workspace:WaitForChild("Thrown"), function(entity)
+	InstanceWatcher.new(workspace:WaitForChild("Thrown",5), function(entity)
 		local names = { "BagDrop", "ExplodeCrate", "MinistryCacheIndicator", "Campfire", "BellMeteor" }
 		return table.find(names, entity.Name) ~= nil
 	end, function(entity)
@@ -874,19 +874,19 @@ end;
 		esp.new(entity, flags[entity.Name])
 	end, true)
 
-	InstanceWatcher.new(workspace:WaitForChild("Destructibles"), function(entity)
+	InstanceWatcher.new(workspace:WaitForChild("Destructibles",5), function(entity)
 		return entity.Name == "Campfire"
 	end, function(entity)
 		esp.new(entity, "campfire_esp")
 	end, true)
 
-	InstanceWatcher.new(workspace:WaitForChild("Mechanisms"), function(entity)
+	InstanceWatcher.new(workspace:WaitForChild("Mechanisms",5), function(entity)
 		return entity.Name == "JettyPost"
 	end, function(entity)
 		esp.new(entity, "jetty_post_esp")
 	end, true)
 
-	InstanceWatcher.new(workspace:WaitForChild("Shops"), function(entity)
+	InstanceWatcher.new(workspace:WaitForChild("Shops",5), function(entity)
 		return entity:IsA("BasePart")
 	end, function(entity)
 		esp.new(entity, "shop_esp")
@@ -898,7 +898,7 @@ end;
 		esp.new(entity, "banner_esp")
 	end, true)
 
-	InstanceWatcher.new(workspace:WaitForChild("Live"), function(entity)
+	InstanceWatcher.new(workspace:WaitForChild("Live",5), function(entity)
 		return entity.Name:sub(1, 1) == "." and not entity.Name:match("watcher")
 	end, function(entity)
 		esp.new(entity, "mob_esp")
@@ -972,7 +972,7 @@ end;
 	end
 
 	for _, v in
-		pairs(services.ReplicatedStorage:WaitForChild("MarkerWorkspace"):WaitForChild("AreaMarkers"):GetChildren())
+		pairs(services.ReplicatedStorage:WaitForChild("MarkerWorkspace",5):WaitForChild("AreaMarkers",5):GetChildren())
 	do
 		if v.Name:match("'s Base") or not v:FindFirstChild("AreaMarker") then
 			continue
@@ -1106,3 +1106,4 @@ end;
 
 	return esp
 end)
+

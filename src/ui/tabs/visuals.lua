@@ -244,7 +244,7 @@ end;
 	}, true, 'Filter which ingredients to show in ESP', function() end, true)
 	ingredient_esp_group:newButton("Refresh List", function()
 	    local foundIngredients = {}
-	    for i, v in pairs(workspace:WaitForChild("Ingredients"):GetChildren()) do
+	    for i, v in pairs(workspace:WaitForChild("Ingredients",5):GetChildren()) do
 	        if not table.find(foundIngredients, v.Name) then
 	            table.insert(foundIngredients, v.Name)
 	        end

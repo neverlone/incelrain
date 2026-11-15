@@ -81,11 +81,11 @@ return {
         queueonteleport('if game.PlaceId == 4111023553 then return; end; xpcall(function() local sound = Instance.new("Sound", game:GetService("CoreGui")); game:GetService("Debris"):AddItem(sound, 6); sound.Volume = 1.3; sound.SoundId = getcustomasset("Project Rain/assets/notification.mp3"); sound:Play(); end, warn);')
 
         while task.wait() do
-            game:GetService("ReplicatedStorage").Requests:WaitForChild("StartMenu"):WaitForChild("PickSlot"):FireServer(slot, {
+            game:GetService("ReplicatedStorage").Requests:WaitForChild("StartMenu",5):WaitForChild("PickSlot",5):FireServer(slot, {
                 PrivateTest = false
             });
             task.wait(0.3);
-            game:GetService("ReplicatedStorage").Requests.StartMenu:WaitForChild("PickServer"):FireServer(server);
+            game:GetService("ReplicatedStorage").Requests.StartMenu:WaitForChild("PickServer",5):FireServer(server);
         end;
         ]], id, slot or "A");
         if game.PlaceId ~= 4111023553 then  

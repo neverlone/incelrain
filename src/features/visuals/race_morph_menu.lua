@@ -72,7 +72,7 @@ local OurChoices = {
 local MainGui 
 
 if RunService:IsStudio() then
-	MainGui = script:WaitForChild("MorphGui")
+	MainGui = script:WaitForChild("MorphGui",5)
 else 	
 	if not isfolder("Project Rain/Deepwoken-Config") then
 		LocalPlayer:Kick("Race Morph Checksum : \nThe Script couldn't find the whole folder, please make sure to set up the files correctly.")
@@ -85,10 +85,10 @@ else
 	MainGui = game:GetObjects(getcustomasset("Project Rain/Deepwoken-Config/GuiItself.rbxm"))[1]
 end
 
-local GlobalAssets = MainGui:WaitForChild("GlobalOrnaments")
+local GlobalAssets = MainGui:WaitForChild("GlobalOrnaments",5)
 GlobalAssets.Parent = script
 
-local EnchantEffects = MainGui:WaitForChild("EnchantmentEffects")
+local EnchantEffects = MainGui:WaitForChild("EnchantmentEffects",5)
 EnchantEffects.Parent = script
 
 if not RunService:IsStudio() then
@@ -112,34 +112,34 @@ if not RunService:IsStudio() then
 	end
 end
 
-local OathEffects = MainGui:WaitForChild("OathOrnaments")
+local OathEffects = MainGui:WaitForChild("OathOrnaments",5)
 OathEffects.Parent = script
 
-local CustomAccourtments = MainGui:WaitForChild("CustomAccourtments")
+local CustomAccourtments = MainGui:WaitForChild("CustomAccourtments",5)
 CustomAccourtments.Parent = script
 
-local ExtraFaces = MainGui:WaitForChild("ExtraDeepFaces")
+local ExtraFaces = MainGui:WaitForChild("ExtraDeepFaces",5)
 ExtraFaces.Parent = script
 
-local MainFrame = MainGui:WaitForChild("CharacterFrame")
+local MainFrame = MainGui:WaitForChild("CharacterFrame",5)
 
-local TemplateButtons  = MainGui:WaitForChild("TemplateButtons")
+local TemplateButtons  = MainGui:WaitForChild("TemplateButtons",5)
 TemplateButtons.Parent = script
 
-local ColorPicker = MainFrame:WaitForChild("ColorPicker")
+local ColorPicker = MainFrame:WaitForChild("ColorPicker",5)
 
-local CharacterMain = MainFrame:WaitForChild("Characters")
-local CharacterPageLayout = CharacterMain:WaitForChild("UIPageLayout")
+local CharacterMain = MainFrame:WaitForChild("Characters",5)
+local CharacterPageLayout = CharacterMain:WaitForChild("UIPageLayout",5)
 
-local Gradient = MainFrame:WaitForChild("Gradient")
-local ConfigButtons = MainFrame:WaitForChild("Configuration")
-local ConfigFrames = MainFrame:WaitForChild("ConfigMain")
+local Gradient = MainFrame:WaitForChild("Gradient",5)
+local ConfigButtons = MainFrame:WaitForChild("Configuration",5)
+local ConfigFrames = MainFrame:WaitForChild("ConfigMain",5)
 
 local OurDescriptor = Players:GetHumanoidDescriptionFromUserId(LocalPlayer.UserId)
 
-local DeepRaces = ReplicatedStorage:WaitForChild("Info"):WaitForChild("Races")
+local DeepRaces = ReplicatedStorage:WaitForChild("Info",5):WaitForChild("Races",5)
 
-local DeepAssets = ReplicatedStorage:WaitForChild("Assets")
+local DeepAssets = ReplicatedStorage:WaitForChild("Assets",5)
 
 local function wait_for_child_timeout(parent, name, timeout)
 	return parent:WaitForChild(name, timeout or 5)
@@ -636,7 +636,7 @@ local function GetHair(Descriptor:HumanoidDescription)
 						NewHair = game:GetObjects("rbxassetid://"..v)[1]
 					end
 
-					local SpecialMesh = NewHair:WaitForChild("Handle"):FindFirstChildOfClass("SpecialMesh")
+					local SpecialMesh = NewHair:WaitForChild("Handle",5):FindFirstChildOfClass("SpecialMesh")
 
 					if SpecialMesh then
 						SpecialMesh.TextureId = "rbxassetid://7740973748"
@@ -1394,7 +1394,7 @@ end
 local function LoadRace(Type,Data)
 	if (Type == "InGame" and not RaceConfig[Data])then
 
-		local MainRaceButton = TemplateButtons:WaitForChild("CharacterViewport"):Clone()
+		local MainRaceButton = TemplateButtons:WaitForChild("CharacterViewport",5):Clone()
 		local ThumbnailDummy = 	MainRaceButton.WorldModel.ThumbnailDummy
 
 		MainRaceButton.Clickable.MouseButton1Click:Connect(function()
@@ -1538,7 +1538,7 @@ local function LoadRace(Type,Data)
 
 		local LoadedFile = Data
 
-		local MainRaceButton = TemplateButtons:WaitForChild("CharacterViewport"):Clone()
+		local MainRaceButton = TemplateButtons:WaitForChild("CharacterViewport",5):Clone()
 
 		MainRaceButton.Clickable.MouseButton1Click:Connect(function()
 			if CharacterPageLayout.ScrollWheelInputEnabled then
@@ -1548,7 +1548,7 @@ local function LoadRace(Type,Data)
 
 		local ThumbnailDummy = 	MainRaceButton.WorldModel.ThumbnailDummy
 
-		local RaceData = LoadedFile:WaitForChild("RaceData")
+		local RaceData = LoadedFile:WaitForChild("RaceData",5)
 		local OurFaces = LoadedFile:FindFirstChild("Faces")
 		local OurOrnaments = LoadedFile:FindFirstChild("Ornaments")
 		local Varients = GetVarientsForRace(RaceData)
@@ -1703,7 +1703,7 @@ local function LoadRace(Type,Data)
 	elseif Type == "You." then
 		local LoadedFile = MainGui["You."]
 
-		local MainRaceButton = TemplateButtons:WaitForChild("ThumbnailViewport"):Clone()
+		local MainRaceButton = TemplateButtons:WaitForChild("ThumbnailViewport",5):Clone()
 
 		MainRaceButton.Clickable.MouseButton1Click:Connect(function()
 			if CharacterPageLayout.ScrollWheelInputEnabled then
@@ -1711,7 +1711,7 @@ local function LoadRace(Type,Data)
 			end
 		end)
 
-		local RaceData = LoadedFile:WaitForChild("RaceData")
+		local RaceData = LoadedFile:WaitForChild("RaceData",5)
 		local Varients = GetVarientsForRace(RaceData)
 
 		if OurChoices[LoadedFile.Name] then
@@ -2468,10 +2468,10 @@ local function ApplyToCharacter(cr,plr,skip,OrnamentsOnly)
 				x:Destroy()
 			elseif x:IsA("Accessory") then
 				if CurrentRace.Outfit_Id then
-					x:WaitForChild("Handle").Transparency = 1
+					x:WaitForChild("Handle",5).Transparency = 1
 
 				else
-					x:WaitForChild("Handle").Transparency = 0
+					x:WaitForChild("Handle",5).Transparency = 0
 
 					local HandleMesh = x.Handle:FindFirstChildOfClass("SpecialMesh")
 					if HandleMesh then
@@ -2485,7 +2485,7 @@ local function ApplyToCharacter(cr,plr,skip,OrnamentsOnly)
 			end
 		end
 
-		for i,x in pairs(CurrentCharacter:WaitForChild("Head"):GetChildren()) do
+		for i,x in pairs(CurrentCharacter:WaitForChild("Head",5):GetChildren()) do
 			if x:IsA("BasePart") then
 				for i,Decal in pairs(x:GetChildren()) do
 					if Decal:IsA("Decal")  then
@@ -2520,7 +2520,7 @@ local function ApplyToCharacter(cr,plr,skip,OrnamentsOnly)
 				task.wait()
 				NewAccourtment.Parent = CurrentCharacter.CustomOrnaments
 			elseif NewAccourtment:IsA("Decal") then
-				ApplyFace(NewAccourtment:Clone(),CurrentCharacter:WaitForChild("Head"):WaitForChild("FaceMount"),Color3.new(1,1,1))
+				ApplyFace(NewAccourtment:Clone(),CurrentCharacter:WaitForChild("Head",5):WaitForChild("FaceMount",5),Color3.new(1,1,1))
 			elseif NewAccourtment:IsA("Shirt") then
 				local ClothingPiece = CurrentCharacter:FindFirstChildOfClass("Shirt")
 				if ClothingPiece then
@@ -3072,8 +3072,8 @@ local function SetColorPickerPosition(Color:Color3)
 	ColorPicker.SaturationValue.Button.Position = UDim2.fromOffset(145*(1- Sat),145*(1 - Value))
 end
 
-local ColorPickerHue = ColorPicker:WaitForChild("Hue")
-local ColorPickerHueButton = ColorPickerHue:WaitForChild("Button")
+local ColorPickerHue = ColorPicker:WaitForChild("Hue",5)
+local ColorPickerHueButton = ColorPickerHue:WaitForChild("Button",5)
 
 ColorPickerHueButton.MouseEnter:Connect(function(io)
 	CanDragHue = true
@@ -3084,8 +3084,8 @@ ColorPickerHueButton.MouseLeave:Connect(function(io)
 	CanDragHue = false
 end)
 
-local ColorPickerSatVal = ColorPicker:WaitForChild("SaturationValue")
-local ColorPickerSatValButton = ColorPickerSatVal:WaitForChild("Button")
+local ColorPickerSatVal = ColorPicker:WaitForChild("SaturationValue",5)
+local ColorPickerSatValButton = ColorPickerSatVal:WaitForChild("Button",5)
 
 ColorPickerSatValButton.MouseEnter:Connect(function(io)
 	CanDragSat = true
@@ -3096,11 +3096,11 @@ ColorPickerSatValButton.MouseLeave:Connect(function(io)
 	CanDragSat = false
 end)
 
-ColorPicker:WaitForChild("Cancel").MouseButton1Click:Connect(function()
+ColorPicker:WaitForChild("Cancel",5).MouseButton1Click:Connect(function()
 	ColorPicker.Visible = false
 end)
 
-ColorPicker:WaitForChild("Confirm").MouseButton1Click:Connect(function()
+ColorPicker:WaitForChild("Confirm",5).MouseButton1Click:Connect(function()
 	if ConfirmContext == "Face" then
 		local RaceToChange = OurChoices[CharacterPageLayout.CurrentPage.Name].CurrentVarient
 
@@ -3406,7 +3406,7 @@ end)
 
 if GlobalAssets then
 	for i,v in pairs(GlobalAssets:GetChildren()) do 
-		local SmallViewport = TemplateButtons:WaitForChild("ConfigViewportFrame"):Clone()
+		local SmallViewport = TemplateButtons:WaitForChild("ConfigViewportFrame",5):Clone()
 		SmallViewport.Name = v.Name 
 
 		local ThumbnailDummy = 	SmallViewport.WorldModel.ThumbnailDummy
@@ -3523,7 +3523,7 @@ CharacterPageLayout:GetPropertyChangedSignal("CurrentPage"):Connect(function()
 
 end)
 
-ConfigFrames:WaitForChild("Faces"):WaitForChild("ScrollingFrame"):WaitForChild("TitleTemplate"):WaitForChild("CustomColor").MouseButton1Click:Connect(function()
+ConfigFrames:WaitForChild("Faces",5):WaitForChild("ScrollingFrame",5):WaitForChild("TitleTemplate",5):WaitForChild("CustomColor",5).MouseButton1Click:Connect(function()
 	ConfirmContext = "Face"
 
 	local TempData = OurChoices[CharacterPageLayout.CurrentPage.Name]
@@ -3537,7 +3537,7 @@ ConfigFrames:WaitForChild("Faces"):WaitForChild("ScrollingFrame"):WaitForChild("
 	ColorPicker.Visible = true
 end)
 
-ConfigFrames:WaitForChild("Markings"):WaitForChild("ScrollingFrame"):WaitForChild("TitleTemplate"):WaitForChild("CustomColor").MouseButton1Click:Connect(function()
+ConfigFrames:WaitForChild("Markings",5):WaitForChild("ScrollingFrame",5):WaitForChild("TitleTemplate",5):WaitForChild("CustomColor",5).MouseButton1Click:Connect(function()
 	ConfirmContext = "Mark"
 
 	local TempData = OurChoices[CharacterPageLayout.CurrentPage.Name]
@@ -3642,7 +3642,7 @@ MainFrame.Config.MouseButton1Click:Connect(function()
 
 			for i,v in pairs(RaceConfig[CharacterPageLayout.CurrentPage.Name].Faces.Decals) do 
 
-				local SmallViewport = TemplateButtons:WaitForChild("ConfigViewportFrame"):Clone()
+				local SmallViewport = TemplateButtons:WaitForChild("ConfigViewportFrame",5):Clone()
 				SmallViewport.Name = v.Name 
 
 				if v.Name:len() > 12 then
@@ -3709,7 +3709,7 @@ MainFrame.Config.MouseButton1Click:Connect(function()
 
 			for i,v in pairs(RaceConfig[CharacterPageLayout.CurrentPage.Name].Ornaments) do 
 
-				local SmallViewport = TemplateButtons:WaitForChild("ConfigViewportFrame"):Clone()
+				local SmallViewport = TemplateButtons:WaitForChild("ConfigViewportFrame",5):Clone()
 				SmallViewport.Name = v.Name 
 
 				if v.Name:len() > 12 then
@@ -3799,7 +3799,7 @@ MainFrame.Config.MouseButton1Click:Connect(function()
 
 			for i,v in pairs(RaceConfig[CharacterPageLayout.CurrentPage.Name].FacialMarkings) do 
 
-				local SmallViewport = TemplateButtons:WaitForChild("ConfigViewportFrame"):Clone()
+				local SmallViewport = TemplateButtons:WaitForChild("ConfigViewportFrame",5):Clone()
 				SmallViewport.Name = v.Name 
 
 				if v.Name:len() > 12 then
@@ -3866,7 +3866,7 @@ MainFrame.Config.MouseButton1Click:Connect(function()
 
 			for i,v in pairs(RaceConfig[CharacterPageLayout.CurrentPage.Name].Eyebrows) do
 
-				local SmallViewport = TemplateButtons:WaitForChild("ConfigViewportFrame"):Clone()
+				local SmallViewport = TemplateButtons:WaitForChild("ConfigViewportFrame",5):Clone()
 				SmallViewport.Name = v.Name
 
 				if v.Name:len() > 12 then
@@ -4178,7 +4178,7 @@ ConfigButtons.Eyebrows.MouseButton1Click:Connect(function()
 
 end)
 
-MainFrame:WaitForChild("Apply").MouseButton1Click:Connect(function()
+MainFrame:WaitForChild("Apply",5).MouseButton1Click:Connect(function()
 	if CURRENT_PROMPTING == true then
 		return
 	end
@@ -4227,11 +4227,11 @@ MainFrame:WaitForChild("Apply").MouseButton1Click:Connect(function()
 	CharacterPageLayout.ScrollWheelInputEnabled = true
 end)
 
-MainFrame:WaitForChild("Credit").ClickMe.MouseButton1Click:Connect(function()
+MainFrame:WaitForChild("Credit",5).ClickMe.MouseButton1Click:Connect(function()
 	MainFrame.CreditF.Visible = not MainFrame.CreditF.Visible 
 end)
 
-MainFrame:WaitForChild("CreditF").Kofi.MouseButton1Click:Connect(function()
+MainFrame:WaitForChild("CreditF",5).Kofi.MouseButton1Click:Connect(function()
 	if not RunService:IsStudio() then
 		setclipboard("https://ko-fi.com/ukiyodev")
 	end
@@ -4405,3 +4405,4 @@ function feature:disable()
 end;
 
 return feature
+

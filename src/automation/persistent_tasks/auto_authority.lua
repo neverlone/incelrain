@@ -33,17 +33,17 @@ struct = automation_struct:construct({
                         "FriendlyFire",
                         true
                     }
-                    game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("UpdateUXSettings"):FireServer(unpack(args))
+                    game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("UpdateUXSettings",5):FireServer(unpack(args))
 
                     aztup.flags.aa_bypass = true
 
                     local current_tween;
                     
-                    local send_dialogue = game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue");
-                    local destructibles = workspace:WaitForChild("Destructibles");
-                    local npc_folder = workspace:WaitForChild("NPCs");
-                    local terrain = workspace:WaitForChild("Terrain");
-                    local live = workspace:WaitForChild("Live");
+                    local send_dialogue = game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5);
+                    local destructibles = workspace:WaitForChild("Destructibles",5);
+                    local npc_folder = workspace:WaitForChild("NPCs",5);
+                    local terrain = workspace:WaitForChild("Terrain",5);
+                    local live = workspace:WaitForChild("Live",5);
                     
                     local got = false;
                     local fc = 0;
@@ -56,7 +56,7 @@ struct = automation_struct:construct({
                         task.wait()
                         current_tween = Tween.new(CFrame.new(-7502, 2000, 3481), true, 225).wait();
                         current_tween = Tween.new(CFrame.new(-7502, 11, 3481), true, 225).wait();
-                        fireproximityprompt(npc_folder:WaitForChild("Captain Trist"):WaitForChild("InteractPrompt"))
+                        fireproximityprompt(npc_folder:WaitForChild("Captain Trist",5):WaitForChild("InteractPrompt",5))
                     until got;
                     local starting_fc = fc;
                     repeat 
@@ -104,7 +104,7 @@ struct = automation_struct:construct({
                                         exit = true
                                     }
                                 }
-                                game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args))
+                                game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
                             until not local_player.instance.PlayerGui.DialogueGui.Enabled
                             
                             current_tween = Tween.new(object * CFrame.new(0, 2000, 0), true, 225).wait();
@@ -154,7 +154,7 @@ struct = automation_struct:construct({
                                 task.wait()
                                 current_tween = Tween.new(CFrame.new(-7502, 2000, 3481), true, 225).wait();
                                 current_tween = Tween.new(CFrame.new(-7502, 11, 3481), true, 225).wait();            
-                                fireproximityprompt(npc_folder:WaitForChild("Captain Trist"):WaitForChild("InteractPrompt"))
+                                fireproximityprompt(npc_folder:WaitForChild("Captain Trist",5):WaitForChild("InteractPrompt",5))
                             until got;
                         end;
                         barrels = function()
@@ -165,7 +165,7 @@ struct = automation_struct:construct({
                                         exit = true
                                     }
                                 }
-                                game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args))
+                                game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
                             until not local_player.instance.PlayerGui.DialogueGui.Enabled
                                 end;
                                 
@@ -195,7 +195,7 @@ struct = automation_struct:construct({
                                 task.wait()
                                 current_tween = Tween.new(CFrame.new(-7502, 2000, 3481), true, 225).wait();
                                 current_tween = Tween.new(CFrame.new(-7502, 11, 3481), true, 225).wait();
-                                fireproximityprompt(npc_folder:WaitForChild("Captain Trist"):WaitForChild("InteractPrompt"))
+                                fireproximityprompt(npc_folder:WaitForChild("Captain Trist",5):WaitForChild("InteractPrompt",5))
                             until got;
                         end,
                         secure = function()
@@ -252,7 +252,7 @@ struct = automation_struct:construct({
                                 local time_frame = splash_gui and splash_gui:FindFirstChild("TimeFrame");
                                 local time_label = time_frame and time_frame:FindFirstChild("TimeText");
                                 current_tween = Tween.new(CFrame.new(-7502, 11, 3481), true, 225).wait();
-                                fireproximityprompt(npc_folder:WaitForChild("Captain Trist"):WaitForChild("InteractPrompt"))
+                                fireproximityprompt(npc_folder:WaitForChild("Captain Trist",5):WaitForChild("InteractPrompt",5))
                             until got;
                         end
                     }
@@ -266,7 +266,7 @@ struct = automation_struct:construct({
                                 exit = true
                             }
                         }
-                        game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args))
+                        game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
                     until not local_player.instance.PlayerGui.DialogueGui.Enabled
                     
                     self:continuation()

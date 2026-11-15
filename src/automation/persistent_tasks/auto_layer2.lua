@@ -308,7 +308,7 @@ local layertwo = {
                     exit = true
                 }
             }
-            game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args))
+            game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
             
             return
         end
@@ -318,7 +318,7 @@ local layertwo = {
                 choice = text
             }
         }
-        game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args))
+        game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
         task.wait(0.5)
     end,
 }
@@ -413,7 +413,7 @@ function layertwo:handle_medallions()
                     shopchoice = random_choice
                 }
             }
-            game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args))
+            game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
             task.wait(.5)
         end 
         task.wait()

@@ -2,8 +2,8 @@ local ingredients = workspace:FindFirstChild("Ingredients");
 local npcs = workspace:FindFirstChild("NPCs");
 local live = workspace:FindFirstChild("Live");
 
-local requests = services.ReplicatedStorage:WaitForChild("Requests");
-local send_dialogue = requests and requests:WaitForChild("SendDialogue");
+local requests = services.ReplicatedStorage:WaitForChild("Requests",5);
+local send_dialogue = requests and requests:WaitForChild("SendDialogue",5);
 
 function safe_tween(tween)
     if aztup.maid.objective_tween then aztup.maid.objective_tween.stop() end

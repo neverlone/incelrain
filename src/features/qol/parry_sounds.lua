@@ -9,7 +9,7 @@ end;
         feature.current = nil;
     end;
 
-    feature.current = character:WaitForChild("HumanoidRootPart").ChildAdded:Connect(function(child)
+    feature.current = character:WaitForChild("HumanoidRootPart",5).ChildAdded:Connect(function(child)
         if not child.Name:match("4954186776") then
             return        
 end;

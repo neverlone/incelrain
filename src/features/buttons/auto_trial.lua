@@ -141,7 +141,7 @@ function HandleTrial()
         task.wait()
     until FindMob("Nomad")
     task.wait(0.25);
-    game:GetService("Players").LocalPlayer.Character:WaitForChild("CharacterHandler"):WaitForChild("Requests"):WaitForChild("Carry"):FireServer()
+    game:GetService("Players").LocalPlayer.Character:WaitForChild("CharacterHandler",5):WaitForChild("Requests",5):WaitForChild("Carry",5):FireServer()
 
     repeat 
         task.wait()
@@ -172,12 +172,12 @@ function HandleTrial()
                 task.wait()
             until FindMob("Nomad")
             task.wait(0.25);
-            game:GetService("Players").LocalPlayer.Character:WaitForChild("CharacterHandler"):WaitForChild("Requests"):WaitForChild("Carry"):FireServer()
+            game:GetService("Players").LocalPlayer.Character:WaitForChild("CharacterHandler",5):WaitForChild("Requests",5):WaitForChild("Carry",5):FireServer()
             local old_cf = local_player.root_part.CFrame
             task.wait(2.5);
             local_player.root_part.CFrame = CFrame.new(old_cf.X, 0, old_cf.Z);
             task.wait(1);
-            game:GetService("Players").LocalPlayer.Character:WaitForChild("CharacterHandler"):WaitForChild("Requests"):WaitForChild("Carry"):FireServer()
+            game:GetService("Players").LocalPlayer.Character:WaitForChild("CharacterHandler",5):WaitForChild("Requests",5):WaitForChild("Carry",5):FireServer()
             task.wait(1);
             local_player.root_part.CFrame = old_cf + Vector3.new(0, 10, 0);
             continue        

@@ -284,7 +284,7 @@ function feature:connect()
         self.last_conn:Disconnect();
     end;
 
-    local player_gui = local_player.instance:WaitForChild("PlayerGui");
+    local player_gui = local_player.instance:WaitForChild("PlayerGui",5);
     player_gui:WaitForChild("LeaderboardGui", 9e9):WaitForChild("MainFrame", 9e9):WaitForChild("ScrollingFrame", 9e9);
 
     wait_for_player_frame_map();
@@ -303,7 +303,7 @@ function feature:enable()
     self.was_on = true;
 
     task.spawn(xpcall, function()
-        local player_gui = local_player.instance:WaitForChild("PlayerGui");
+        local player_gui = local_player.instance:WaitForChild("PlayerGui",5);
 
         if self.gui_added_conn then
             self.gui_added_conn:Disconnect();

@@ -76,7 +76,7 @@ task.spawn(pcall, function()
 end);
 
 task.spawn(pcall, function()
-    local update = game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("EffectReplication"):WaitForChild("_update");
+    local update = game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("EffectReplication",5):WaitForChild("_update",5);
     update.OnClientEvent:Connect(function(effect)
         if effect.updateType == "clear" or effect.updateType == "updatecontainer" then
             EffectReplicatorHandler:connect();  

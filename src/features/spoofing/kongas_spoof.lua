@@ -8,7 +8,7 @@ local passive = "Konga's Clutch Ring"
 local function get_passives()
     local effect_replicator = getgenv().EffectReplicator;
     if not effect_replicator then
-        local success, result = pcall(require, game:GetService("ReplicatedStorage"):WaitForChild("EffectReplicator"));
+        local success, result = pcall(require, game:GetService("ReplicatedStorage"):WaitForChild("EffectReplicator",5));
         if success then
             effect_replicator = result;
         end;

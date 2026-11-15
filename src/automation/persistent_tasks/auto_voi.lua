@@ -76,7 +76,7 @@ local auto_voi = {
 
     aztup_toggles.mob_ai_breaker:SetValue(true);
     aztup_options.breaker_type.Value = "Aggressive"
-    workspace.Live:FindFirstChild(name):WaitForChild("HumanoidRootPart");
+    workspace.Live:FindFirstChild(name):WaitForChild("HumanoidRootPart",5);
 
     while task.wait() and not workspace:FindFirstChild("DungeonExit") do
         pcall(function()
@@ -125,7 +125,7 @@ function auto_voi:enmity()
         aztup.flags.atb_y_offset = 6
         aztup.flags.atb_z_offset = 0
         aztup_toggles.attach_to_back:SetValue(true);
-        aztup.features.attach_to_back.target = workspace.Live:WaitForChild(".enmity_true1");
+        aztup.features.attach_to_back.target = workspace.Live:WaitForChild(".enmity_true1",5);
         aztup.features.attach_to_back.state = "attaching";
         aztup.flags.atb_rotate = true;
         if not aztup.flags.m1_hold then
@@ -215,3 +215,4 @@ struct = automation_struct:construct({
 struct.logic = auto_voi;
 
 return struct;
+

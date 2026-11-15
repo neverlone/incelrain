@@ -1,4 +1,4 @@
-local get_score = services.ReplicatedStorage:WaitForChild("Requests"):WaitForChild("GetScore");
+local get_score = services.ReplicatedStorage:WaitForChild("Requests",5):WaitForChild("GetScore",5);
 local feature = Feature:new("no_echo_screen", is_depths and get_score.OnClientEvent or nil, function() 
 	get_score:FireServer();
 

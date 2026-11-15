@@ -49,7 +49,7 @@ local auto_deepdrill = {
     end,
 
     send_dialogue = function(text, exit)
-        local remote = game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue");
+        local remote = game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5);
         local args = exit and { { exit = true } } or { { choice = text } };
 
         local acked = false;
@@ -217,3 +217,4 @@ struct = automation_struct:construct({
 });
 
 return struct;
+

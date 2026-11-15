@@ -67,7 +67,7 @@ function autotitus:attachToTitus()
         task.wait() 
     until titus or not aztup.automation:has_any();
     if not titus then return end
-    local torso = titus:WaitForChild("Torso")
+    local torso = titus:WaitForChild("Torso",5)
     if not torso then return end
 
     local playerRoot = local_player.root_part;
@@ -202,7 +202,7 @@ function autotitus:getechoes()
     if enchantStone and aztup.automation:has_any() then
         local current_weapon = local_player.instance.Backpack:FindFirstChild("Weapon") and local_player.instance.Backpack:FindFirstChild("Weapon").Weapon.Value;
         pcall(function()
-            services.ReplicatedStorage:WaitForChild("Requests"):WaitForChild("Unequip"):InvokeServer("Weapon", true)
+            services.ReplicatedStorage:WaitForChild("Requests",5):WaitForChild("Unequip",5):InvokeServer("Weapon", true)
         end)
         task.wait(0.5)
 
@@ -237,7 +237,7 @@ function autotitus:getechoes()
     end)
 
     local finished = false;
-    local conn = workspace:WaitForChild("DetainmentCore").ChildAdded:Connect(function(child)
+    local conn = workspace:WaitForChild("DetainmentCore",5).ChildAdded:Connect(function(child)
         if child.Name == "DungeonExitFinal" then
             finished = true;
         end
@@ -338,12 +338,12 @@ local state_machine = StateMachine.create({
                     if game.PlaceId ~= 4111023553 then return; end
                     local slot = "%s";
                     queueonteleport('if game.PlaceId == 4111023553 then return; end; xpcall(function() local sound = Instance.new("Sound", game:GetService("CoreGui")); game:GetService("Debris"):AddItem(sound, 6); sound.Volume = 1.3; sound.SoundId = getcustomasset("Project Rain/assets/notification.mp3"); sound:Play(); end, warn);')
-                    game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("WipeSlot"):InvokeServer(slot)
+                    game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("WipeSlot",5):InvokeServer(slot)
                     task.wait(0.5)
                 ]]
                 queue_on_teleport(string.format(chooseSlot, slot or "A"))
                 
-                local get_score = services.ReplicatedStorage:WaitForChild("Requests"):WaitForChild("GetScore");
+                local get_score = services.ReplicatedStorage:WaitForChild("Requests",5):WaitForChild("GetScore",5);
                 get_score.OnClientEvent:Connect(function(v)
                     local wiped_at = tick();
                     persistent_data:set("echoes_gained", persistent_data:get("echoes_gained", 0) + (v and typeof(v) == "table" and v.Echoes or 0))
@@ -354,8 +354,8 @@ local state_machine = StateMachine.create({
 
                 while task.wait() do
                     local_player.root_part.CFrame = tpLocation;
-                    fireproximityprompt(workspace:WaitForChild("NPCs"):WaitForChild("Self"):WaitForChild("InteractPrompt"))
-                    game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer({ choice = '[The End]' })
+                    fireproximityprompt(workspace:WaitForChild("NPCs",5):WaitForChild("Self",5):WaitForChild("InteractPrompt",5))
+                    game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer({ choice = '[The End]' })
                 end;
             end
 

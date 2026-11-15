@@ -31,7 +31,7 @@ local auto_echo_layer2 = {
 
     send_dialogue = function(text, exit)
         local args = exit and { { exit = true } } or { { choice = text } };
-        game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args));
+        game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args));
         if not exit then task.wait(0.5); end
     end,
 };
@@ -294,8 +294,8 @@ local state_machine = StateMachine.create({
             --    end
             --end
 
-            local requests = services.ReplicatedStorage:WaitForChild("Requests");
-            local start = requests:WaitForChild("StartMenu"):WaitForChild("Start")
+            local requests = services.ReplicatedStorage:WaitForChild("Requests",5);
+            local start = requests:WaitForChild("StartMenu",5):WaitForChild("Start",5)
             repeat
                 start:FireServer()
                 task.wait(0.5)
@@ -569,3 +569,4 @@ struct = automation_struct:construct({
 });
 
 return struct;
+

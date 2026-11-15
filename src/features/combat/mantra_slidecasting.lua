@@ -38,9 +38,9 @@ end;
 		
         local v298 = Ray.new(local_player.root_part.Position, (Vector3.new(0, -10, 0)));
         local l_workspace_PartOnRayWithIgnoreList_1, _, _ = workspace:FindPartOnRayWithIgnoreList(v298, {
-            workspace:WaitForChild("Live"), 
-            workspace:WaitForChild("NPCs"), 
-            workspace:WaitForChild("Thrown")
+            workspace:WaitForChild("Live",5), 
+            workspace:WaitForChild("NPCs",5), 
+            workspace:WaitForChild("Thrown",5)
         });
 
 		local l_MoveDirection_0 = local_player.humanoid.MoveDirection;

@@ -70,8 +70,8 @@ local autosaramed = {
                         ['Gathered Wheat'] = local_player.instance:FindFirstChild("Gathered Wheat", true) ~= nil,
                     }
                 }
-                local requests = services.ReplicatedStorage:WaitForChild("Requests")
-                local craftRemote = requests:WaitForChild("Craft") :: RemoteFunction
+                local requests = services.ReplicatedStorage:WaitForChild("Requests",5)
+                local craftRemote = requests:WaitForChild("Craft",5) :: RemoteFunction
                 
                 local gatheredWheat = local_player.instance.Backpack:FindFirstChild('Gathered Wheat')
                 local gatheredWheatQuantity = gatheredWheat and gatheredWheat:FindFirstChild('Quantity') and gatheredWheat:FindFirstChild('Quantity').Value
@@ -231,7 +231,7 @@ local autosaramed = {
     
     foundMobs = function()
         local mobsExist = false
-        for _, mobModel in pairs(workspace:WaitForChild("Live"):GetChildren()) do
+        for _, mobModel in pairs(workspace:WaitForChild("Live",5):GetChildren()) do
             if mobModel:GetAttribute('MOB_rich_name') then
                 mobsExist = true
             end
@@ -487,7 +487,7 @@ function autosaramed:pathTosaramed()
             }
         }
         
-        game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args))
+        game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
         
         task.wait(5)
     end

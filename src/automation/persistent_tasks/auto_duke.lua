@@ -235,7 +235,7 @@ function autoduke:create_instance()
 
     while task.wait() and not started do    
         sethiddenproperty(local_player.humanoid, "MoveDirectionInternal", Vector3.one)
-        fireproximityprompt(workspace:WaitForChild("Doors"):WaitForChild("ErisiaDungeonGate"):WaitForChild("Main"):WaitForChild("InteractPrompt"));
+        fireproximityprompt(workspace:WaitForChild("Doors",5):WaitForChild("ErisiaDungeonGate",5):WaitForChild("Main",5):WaitForChild("InteractPrompt",5));
         task.wait();
     end;
 
@@ -328,7 +328,7 @@ function autoduke:kill_duke()
     --    return;
     --end
 
-    local send_dialogue = game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue");
+    local send_dialogue = game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5);
     local got = false;
     local fc = 0;
     send_dialogue.OnClientEvent:Connect(function(v273) 
@@ -340,8 +340,8 @@ function autoduke:kill_duke()
         repeat 
             Instance.new("VirtualInputManager"):SendKeyEvent(false, Enum.KeyCode.One, false, game)
             task.wait() 
-            Tween.new(workspace.Live:WaitForChild(".theduke11"):WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0, 0, 3), true, 250).wait();
-            fireproximityprompt(workspace.Live[".theduke11"]:WaitForChild("InteractPrompt"));
+            Tween.new(workspace.Live:WaitForChild(".theduke11",5):WaitForChild("HumanoidRootPart",5).CFrame * CFrame.new(0, 0, 3), true, 250).wait();
+            fireproximityprompt(workspace.Live[".theduke11"]:WaitForChild("InteractPrompt",5));
             Instance.new("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.One, false, game)
         until got;
     end;

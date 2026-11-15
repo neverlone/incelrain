@@ -444,7 +444,7 @@ function feat:enable()
     local builderId = url:match("id=([%w%d]+)")
     if not builderId then return end
     
-    local backpack = LocalPlayer.PlayerGui:WaitForChild("BackpackGui")
+    local backpack = LocalPlayer.PlayerGui:WaitForChild("BackpackGui",5)
     local talentScroll = backpack.RightFrame.TalentSheet.Container.TalentScroll
     
     aztup.maid:give_task(talentScroll.ChildAdded:Connect(function(c)
@@ -515,6 +515,7 @@ function feat:disable()
 end
 
 return feat
+
 
 
 

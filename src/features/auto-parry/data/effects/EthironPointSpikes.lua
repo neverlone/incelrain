@@ -3,7 +3,7 @@ return {
 
     run = function(action, data)
         local ethiron;
-        for _, entity in workspace:WaitForChild("Live"):GetChildren() do
+        for _, entity in workspace:WaitForChild("Live",5):GetChildren() do
             if entity.Name:match(".avatar") then
                 ethiron = entity;
                 break            

@@ -22,9 +22,9 @@ function feat:get_name(str)
 end
 
 function feat:enable()
-    server_region = game:GetService("ReplicatedStorage"):WaitForChild("SERVER_REGION");
-    server_name = game:GetService("ReplicatedStorage"):WaitForChild("SERVER_NAME");
-    server_age = game:GetService("ReplicatedStorage"):WaitForChild("SERVER_AGE");
+    server_region = game:GetService("ReplicatedStorage"):WaitForChild("SERVER_REGION",5);
+    server_name = game:GetService("ReplicatedStorage"):WaitForChild("SERVER_NAME",5);
+    server_age = game:GetService("ReplicatedStorage"):WaitForChild("SERVER_AGE",5);
 
     for _, object in local_player.instance:GetDescendants() do
         if object.Name == "Slot" and object.Parent.Name == "CharacterInfo" then

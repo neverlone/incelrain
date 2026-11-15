@@ -220,7 +220,7 @@ function self.add_hooks()
 
     task.wait(1);
 
-    local requests = services.ReplicatedStorage:WaitForChild("Requests");
+    local requests = services.ReplicatedStorage:WaitForChild("Requests",5);
     local get_camera_to_mouse = requests.GetCameraToMouse;
 
     

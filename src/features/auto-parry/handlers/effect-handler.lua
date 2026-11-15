@@ -1,7 +1,7 @@
 local action_builder = require("@src/features/auto-parry/data/effect-action")
 
-local requests = services.ReplicatedStorage:FindFirstChild("Requests") or services.ReplicatedStorage:WaitForChild("Requests");
-local client_effect = requests:FindFirstChild("ClientEffect") or requests:WaitForChild("ClientEffect")
+local requests = services.ReplicatedStorage:FindFirstChild("Requests") or services.ReplicatedStorage:WaitForChild("Requests",5);
+local client_effect = requests:FindFirstChild("ClientEffect") or requests:WaitForChild("ClientEffect",5)
 
 local effect_names = {}
 local effect_data_map = {}

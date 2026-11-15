@@ -29,7 +29,7 @@ end
     local equip_weapon = character_handler.Requests.DrawWeapon;
     if not equip_weapon then return end
 
-    local rep_requests = services.ReplicatedStorage:WaitForChild("Requests");
+    local rep_requests = services.ReplicatedStorage:WaitForChild("Requests",5);
     rep_requests.MapOpen:FireServer(true);
     rep_requests.MapOpen:FireServer(false)
     equip_weapon:FireServer(true);
@@ -62,7 +62,7 @@ function feat:disable()
     table.clear(modded_parts);
 
     if self.mapped then
-        local rep_requests = services.ReplicatedStorage:WaitForChild("Requests");
+        local rep_requests = services.ReplicatedStorage:WaitForChild("Requests",5);
         for i = 1, 100 do
             rep_requests.MapOpen:FireServer(false)
             task.wait();

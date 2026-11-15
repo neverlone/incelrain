@@ -6,9 +6,9 @@ local WISP_INPUT_MAP = { Z = 1, X = 2, C = 3, V = 4 }
 
 function feature:enable()
 	local ritualSpellInput = game:GetService("ReplicatedStorage")
-		:WaitForChild("Requests")
-		:WaitForChild("Mantras")
-		:WaitForChild("RitualSpellInput")
+		:WaitForChild("Requests",5)
+		:WaitForChild("Mantras",5)
+		:WaitForChild("RitualSpellInput",5)
 
 	local cws = nil
 	local cwp = nil
@@ -89,3 +89,4 @@ function feature:disable()
 end
 
 return feature
+

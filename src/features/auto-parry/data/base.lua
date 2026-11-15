@@ -394,7 +394,7 @@ return {
         local maxWaitTime = 3
 
         while tick() - start < maxWaitTime do
-            for _, object in workspace:WaitForChild("Thrown"):GetChildren() do
+            for _, object in workspace:WaitForChild("Thrown",5):GetChildren() do
                 if object.Name == "BoneSpear" then
                     local distanceThreshold = workspace:FindFirstChild("Layer2Floor1") and 30 or 75
                     
@@ -1061,7 +1061,7 @@ return {
 
         while tick() - start < 1 or has_grab do
             has_grab = false;
-            for _, object in workspace:WaitForChild("Thrown"):GetChildren() do
+            for _, object in workspace:WaitForChild("Thrown",5):GetChildren() do
                 if object.Name ~= "GrabPart" then continue end
 
                 has_grab = true;
@@ -1225,7 +1225,7 @@ return {
 
         while tick() - start < 1 or has_blast do
             has_blast = false;
-            for _, object in workspace:WaitForChild("Thrown"):GetChildren() do
+            for _, object in workspace:WaitForChild("Thrown",5):GetChildren() do
                 if object.Name ~= "DukeBlast" then continue end
 
                 has_blast = true;
@@ -1368,7 +1368,7 @@ return {
 
         while tick() - start < 1 or has_semtex do
             has_semtex = false
-            for _, object in workspace:WaitForChild("Thrown"):GetChildren() do
+            for _, object in workspace:WaitForChild("Thrown",5):GetChildren() do
                 if object.Name ~= "Semtex" then continue end
 
                 has_semtex = true
@@ -2698,7 +2698,7 @@ return {
 
         while tick() - start < 1 or has_javelin do
             has_javelin = false
-            for _, object in workspace:WaitForChild("Thrown"):GetChildren() do
+            for _, object in workspace:WaitForChild("Thrown",5):GetChildren() do
                 if object.Name ~= "SpearPart" or object.Name:find("Splinter") then continue end
 
                 has_javelin = true
@@ -4349,7 +4349,7 @@ end
         	    end;
         	end;
         	if not chain_portal_ice then return end
-        	chain_portal_ice:WaitForChild("Beam");
+        	chain_portal_ice:WaitForChild("Beam",5);
         	repeat task.wait() until chain_portal_ice.Beam.Enabled;
         	action.when = 0.5;
         	action.ignore_early_end = true;
@@ -4688,7 +4688,7 @@ return {
 
         while tick() - start < 1 or has_javelin do
             has_javelin = false;
-            for _, object in workspace:WaitForChild("Thrown"):GetChildren() do
+            for _, object in workspace:WaitForChild("Thrown",5):GetChildren() do
                 if object.Name ~= "WindSlashProjectileBigSnow" then continue end
 
                 has_javelin = true;

@@ -12,7 +12,7 @@ local feature = Feature:new("auto_math_book", local_player.instance.PlayerGui.Ch
     
         if DescSheet then
             local Operation
-            local Desc = DescSheet:WaitForChild("Desc")
+            local Desc = DescSheet:WaitForChild("Desc",5)
             if string.match(Desc.Text:lower(), "plus") then
                 Operation = "plus"
             elseif string.match(Desc.Text:lower(), "divided") then
@@ -40,7 +40,7 @@ local feature = Feature:new("auto_math_book", local_player.instance.PlayerGui.Ch
                 Solved = tonumber(Num1) / tonumber(Num2)
             end
             
-            local options = ChoiceFrame:WaitForChild("Options")
+            local options = ChoiceFrame:WaitForChild("Options",5)
             task.wait()
 
             for i, v in pairs(options:GetChildren()) do

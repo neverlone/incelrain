@@ -113,7 +113,7 @@ local autoescape = {
     end,
 
     foundMobs = function()
-        for _, mob in workspace:WaitForChild("Live"):GetChildren() do
+        for _, mob in workspace:WaitForChild("Live",5):GetChildren() do
             if mob:GetAttribute("MOB_rich_name") then
                 return true;
             end
@@ -348,3 +348,4 @@ struct = automation_struct:construct({
 struct.logic = autoescape;
 
 return struct;
+

@@ -703,9 +703,9 @@ end;
                 DefendActionManager:add_action(entity, "unblock", tick());
             elseif type == "Crouch" then
                 task.spawn(function()
-                    local_player.character:WaitForChild("CharacterHandler"):WaitForChild("Requests"):WaitForChild("ServerCrouch"):FireServer(true);
+                    local_player.character:WaitForChild("CharacterHandler",5):WaitForChild("Requests",5):WaitForChild("ServerCrouch",5):FireServer(true);
                     task.wait(1);
-                    local_player.character:WaitForChild("CharacterHandler"):WaitForChild("Requests"):WaitForChild("ServerCrouch"):FireServer(false);
+                    local_player.character:WaitForChild("CharacterHandler",5):WaitForChild("Requests",5):WaitForChild("ServerCrouch",5):FireServer(false);
                 end);
             elseif type == "Jump" or type == "Legit Jump" then
                 if #services.Players:GetPlayers() == 1 and type ~= "Legit Jump" then

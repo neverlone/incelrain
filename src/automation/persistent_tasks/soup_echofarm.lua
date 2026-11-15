@@ -319,8 +319,8 @@ local state_machine = StateMachine.create({
                     task.wait();
                 
                     local replicatedStorage = game:GetService("ReplicatedStorage")
-                    local requests = replicatedStorage:WaitForChild("Requests")
-                    local craftRemote = requests:WaitForChild("Craft") :: RemoteFunction
+                    local requests = replicatedStorage:WaitForChild("Requests",5)
+                    local craftRemote = requests:WaitForChild("Craft",5) :: RemoteFunction
 
                     local start = tick();
                     repeat 
@@ -378,13 +378,13 @@ local state_machine = StateMachine.create({
                     local args = {
                         slot
                     }
-                    game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("WipeSlot"):InvokeServer(unpack(args))
+                    game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("WipeSlot",5):InvokeServer(unpack(args))
 
                     task.wait(0.5)
                 ]]
                 queue_on_teleport(string.format(chooseSlot, game.JobId, slot or "A"))
 
-                local get_score = services.ReplicatedStorage:WaitForChild("Requests"):WaitForChild("GetScore");
+                local get_score = services.ReplicatedStorage:WaitForChild("Requests",5):WaitForChild("GetScore",5);
                 get_score.OnClientEvent:Connect(function(v)
                     local last_wiped_at = persistent_data:get("wiped_at", nil);
                     local wiped_at = tick();
@@ -447,8 +447,8 @@ local state_machine = StateMachine.create({
                         while task.wait() do end
                     end
 
-                    fireproximityprompt(workspace:WaitForChild("NPCs"):WaitForChild("Self"):WaitForChild("InteractPrompt"))
-                    game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer({
+                    fireproximityprompt(workspace:WaitForChild("NPCs",5):WaitForChild("Self",5):WaitForChild("InteractPrompt",5))
+                    game:GetService("ReplicatedStorage"):WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer({
                         choice = '[The End]',
                     })
                 end;

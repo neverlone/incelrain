@@ -813,7 +813,7 @@ end;
     
 
     
-    InstanceWatcher.new(workspace:WaitForChild("Live"), function(entity)
+    InstanceWatcher.new(workspace:WaitForChild("Live",5), function(entity)
         return entity.Name:sub(1,1) ~= "." and entity.Name ~= services.Players.LocalPlayer.Name
     end, function(entity)   
         local player;

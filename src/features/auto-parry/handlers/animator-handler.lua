@@ -122,8 +122,8 @@ return LPH_NO_VIRTUALIZE(function()
     local allAnimations = {};
     local mobsAnims = {};
     do
-        local animsFolder = services.ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Anims");
-        local mobsAnimsFolder = animsFolder:WaitForChild("Mobs");
+        local animsFolder = services.ReplicatedStorage:WaitForChild("Assets",5):WaitForChild("Anims",5);
+        local mobsAnimsFolder = animsFolder:WaitForChild("Mobs",5);
 
         local match, format = string.match, string.format;
 
@@ -928,9 +928,9 @@ end;
             self.blocked = true;
         elseif type == "Crouch" then
             task.spawn(function()
-                local_player.character:WaitForChild("CharacterHandler"):WaitForChild("Requests"):WaitForChild("ServerCrouch"):FireServer(true)
+                local_player.character:WaitForChild("CharacterHandler",5):WaitForChild("Requests",5):WaitForChild("ServerCrouch",5):FireServer(true)
                 task.wait(1);
-                local_player.character:WaitForChild("CharacterHandler"):WaitForChild("Requests"):WaitForChild("ServerCrouch"):FireServer(false);
+                local_player.character:WaitForChild("CharacterHandler",5):WaitForChild("Requests",5):WaitForChild("ServerCrouch",5):FireServer(false);
             end)
         end;
     end
@@ -1536,7 +1536,7 @@ end);
         return nil    
 end);
 
-    InstanceWatcher.new(workspace:WaitForChild("Live"), function(entity)
+    InstanceWatcher.new(workspace:WaitForChild("Live",5), function(entity)
         local start = tick();
     
         repeat task.wait() until entity:FindFirstChild("Animator", true) or tick() - start > 5;

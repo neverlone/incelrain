@@ -278,7 +278,7 @@ function moonseyrie:handle()
             choice = "[Interact]"
         }
     }
-    services.ReplicatedStorage:WaitForChild("Requests"):WaitForChild("SendDialogue"):FireServer(unpack(args))
+    services.ReplicatedStorage:WaitForChild("Requests",5):WaitForChild("SendDialogue",5):FireServer(unpack(args))
     
     self.temp_tween(self, moons_eye_door.CFrame * CFrame.new(0, 0, -100), 170)
     
