@@ -144,7 +144,16 @@ end
 local state_machine = StateMachine.create({
     initial = "idle",
     events = {
-        { name = "start",       from = "idle",              to = "_get_key" },
+        { name = "start",        from = "idle",                 to = "_get_key" },
+        { name = "generator",    from = "_get_key",             to = "_turn_on_generator" },
+        { name = "talk",         from = "_turn_on_generator",   to = "_talk_to_npc" },
+        { name = "enter",        from = "_talk_to_npc",         to = "_enter_site" },
+        { name = "arrived",      from = "_enter_site",          to = "_arrived" },
+        { name = "restart",      from = "_arrived",             to = "_get_key" },
+    },
+    callbacks = {
+        onenter_get_key = function(self)
+            auto_deepdrill:get_key();
 
             if aztup.automation:has_any() then
                 self:generator();
@@ -217,4 +226,3 @@ struct = automation_struct:construct({
 });
 
 return struct;
-
